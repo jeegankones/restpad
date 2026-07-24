@@ -96,6 +96,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "package": "npm run build && vsce package --no-dependencies",
     "compile:integration": "tsc -p tsconfig.integration.json",
     "pretest:integration": "npm run build && npm run compile:integration",
     "test:integration": "node dist-test/integration/runTest.js"
@@ -109,6 +110,7 @@
     "@types/vscode": "^1.90.0",
     "@vscode/test-cli": "^0.0.15",
     "@vscode/test-electron": "^3.0.0",
+    "@vscode/vsce": "^3.9.2",
     "esbuild": "^0.25.5",
     "glob": "^13.0.6",
     "mocha": "^11.7.6",

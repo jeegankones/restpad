@@ -1,0 +1,25 @@
+# .vscodeignore — controls what ships inside the packaged .vsix.
+#
+# Strategy: exclude everything, then re-include ONLY the runtime files.
+# dist/ is a self-contained esbuild bundle, so node_modules is not shipped
+# (packaged with `vsce package --no-dependencies`).
+
+# --- exclude everything ---
+**
+
+# --- re-include the files the extension needs at runtime ---
+!dist/extension.js
+!syntaxes/**
+!language-configuration.json
+!package.json
+!README.md
+!LICENSE
+
+# Icon for the marketplace listing.
+# TODO(branding): add icon.png at repo root and re-include it here:
+# !icon.png
+
+# --- belt-and-suspenders: keep noise out even if a rule above widens ---
+dist/**/*.map
+**/*.ts
+**/*.test.*
