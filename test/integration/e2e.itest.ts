@@ -4,9 +4,7 @@ import { tmpdir } from "node:os";
 import * as path from "node:path";
 import * as vscode from "vscode";
 import { FixtureServer } from "../server/fixtureServer";
-import { waitUntil } from "./helpers";
-
-const EXTENSION_ID = "restpad.restpad";
+import { EXTENSION_ID, waitUntil } from "./helpers";
 
 /** Find the tab hosting the restpad response webview, if any. */
 function responseWebviewTab(): vscode.Tab | undefined {
