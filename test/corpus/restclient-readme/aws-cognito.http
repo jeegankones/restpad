@@ -1,0 +1,2 @@
+GET https://httpbin.org/aws-auth HTTP/1.1
+Authorization: COGNITO <Username> <Password> <Region> <UserPoolId> <ClientId>

@@ -1,0 +1,2 @@
+GET https://management.azure.com/subscriptions?api-version=2019-06-01 HTTP/1.1
+Authorization: {{$aadToken new public mydomain.onmicrosoft.com aud:https://management.azure.com}}

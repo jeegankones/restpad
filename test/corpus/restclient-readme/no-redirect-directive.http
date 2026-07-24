@@ -1,0 +1,2 @@
+// @no-redirect
+GET https://example.com/redirecting-endpoint HTTP/1.1

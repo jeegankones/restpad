@@ -1,0 +1,2 @@
+GET https://api.example.com/protected HTTP/1.1
+Authorization: Bearer {{$oidcAccessToken new clientId:my-client callbackPort:7777 authorizeEndpoint:https://idp.example.com/authorize tokenEndpoint:https://idp.example.com/token scopes:openid,profile audience:https://api.example.com}}

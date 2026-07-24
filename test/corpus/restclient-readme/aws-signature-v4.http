@@ -1,0 +1,2 @@
+GET https://httpbin.org/aws-auth HTTP/1.1
+Authorization: AWS <accessId> <accessKey> [token:<sessionToken>] [region:<regionName>] [service:<serviceName>]

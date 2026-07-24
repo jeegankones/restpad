@@ -1,0 +1,3 @@
+# Use secretKey from extension environment settings to determine which local machine environment variable to use
+GET https://{{host}}/{{version}}/values/item1?user={{$processEnv USERNAME}}
+Authorization: {{$processEnv %secretKey}}

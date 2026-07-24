@@ -1,0 +1,2 @@
+GET https://graph.microsoft.com/v1.0/me HTTP/1.1
+Authorization: Bearer {{$aadV2Token new AzureCloud scopes:User.Read tenantid:mydomain.onmicrosoft.com clientid:00000000-0000-0000-0000-000000000000}}

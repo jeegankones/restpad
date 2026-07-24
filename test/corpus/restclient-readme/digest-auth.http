@@ -1,0 +1,2 @@
+GET https://httpbin.org/digest-auth/auth/user/passwd
+Authorization: Digest user passwd

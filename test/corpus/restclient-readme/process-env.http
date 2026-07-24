@@ -1,0 +1,3 @@
+# Lookup PRODSECRET from local machine environment
+GET https://{{host}}/{{version}}/values/item1?user={{$processEnv USERNAME}}
+Authorization: {{$processEnv PRODSECRET}}

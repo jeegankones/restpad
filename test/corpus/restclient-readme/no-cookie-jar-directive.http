@@ -1,0 +1,3 @@
+// @no-cookie-jar
+GET https://example.com/no-cookies HTTP/1.1
+Cookie: sessionId=abc123
