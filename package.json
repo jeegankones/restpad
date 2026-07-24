@@ -74,6 +74,10 @@
         "title": "Restpad: Send Request"
       },
       {
+        "command": "restpad.sendAllRequests",
+        "title": "Restpad: Send All Requests"
+      },
+      {
         "command": "restpad.cancelRequest",
         "title": "Restpad: Cancel Request"
       },

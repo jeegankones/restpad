@@ -2,6 +2,7 @@ import { randomBytes } from "node:crypto";
 import * as vscode from "vscode";
 import type { ResponseData } from "../engine/client";
 import type { HttpRequest } from "../parser/httpParser";
+import type { RunResult } from "../runner/runAll";
 import type { ResolvedRequest } from "../variables/resolver";
 import {
   escapeHtml,
@@ -38,6 +39,44 @@ export class ResponsePanel {
     ResponsePanel.current = new ResponsePanel(panel);
     ResponsePanel.current.renderLoading();
     return ResponsePanel.current;
+  }
+
+  static showRun(requestCount: number): ResponsePanel {
+    const panel = ResponsePanel.show({
+      method: "RUN",
+      url: `${requestCount} requests`,
+    } as HttpRequest);
+    panel.panel.title = `Run All (${requestCount})`;
+    return panel;
+  }
+
+  renderRunSummary(results: RunResult[]): void {
+    const rows = results
+      .map((result) => {
+        const status = result.response
+          ? `<span class="status ${statusClass(result.response.status)}">${result.response.status}</span>`
+          : `<span class="status server-error">ERR</span>`;
+        const detail = result.response
+          ? `${formatDuration(result.response.durationMs)} · ${formatSize(result.response.bodySize)}`
+          : escapeHtml(result.error?.message ?? "failed");
+        const label = result.request.name
+          ? `<strong>${escapeHtml(result.request.name)}</strong> · `
+          : "";
+        return `<tr>
+          <td>${status}</td>
+          <td>${label}${escapeHtml(result.resolved.method)} ${escapeHtml(truncate(result.resolved.url, 60))}</td>
+          <td class="detail">${detail}</td>
+        </tr>`;
+      })
+      .join("");
+    const failures = results.filter((r) => !r.response || r.response.status >= 400).length;
+    this.panel.webview.html = this.page(`
+      <div class="statusline">
+        <span class="status ${failures === 0 ? "ok" : "server-error"}">
+          ${results.length} requests · ${failures === 0 ? "all passed" : `${failures} failed`}
+        </span>
+      </div>
+      <table class="run-summary">${rows}</table>`);
   }
 
   private constructor(panel: vscode.WebviewPanel) {
