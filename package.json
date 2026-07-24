@@ -1,7 +1,7 @@
 {
   "name": "restpad",
   "displayName": "Restpad — REST API Client",
-  "description": "Fast, offline REST API client. Open .http files and send requests instantly. No account, no cloud, no paywall surprises. Compatible with REST Client syntax.",
+  "description": "Fast, offline REST API client for .http files — REST Client compatible. No account, no cloud, no paywall. Environments, variables, request chaining, cookies, curl import.",
   "version": "0.0.1",
   "publisher": "restpad",
   "license": "SEE LICENSE IN LICENSE",
@@ -11,19 +11,31 @@
   },
   "categories": [
     "Testing",
-    "Other"
+    "Programming Languages"
   ],
   "keywords": [
     "rest client",
+    "restclient",
     "http client",
+    "httpclient",
     "api client",
+    "apiclient",
     "rest",
     "http",
     "api",
+    "rest api",
     "graphql",
     "postman",
+    "insomnia",
     "thunder client",
-    "rest-client"
+    "bruno",
+    "httpyac",
+    "rest-client",
+    "curl",
+    "http request",
+    "api testing",
+    "dotenv",
+    "environments"
   ],
   "repository": {
     "type": "git",
