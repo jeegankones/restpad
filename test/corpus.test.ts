@@ -45,7 +45,9 @@ describe("corpus: compatibility snapshots", () => {
   });
 
   for (const file of allFiles) {
-    const rel = relative(corpusRoot, file);
+    // Forward slashes always: test names are snapshot keys and must be
+    // identical across OSes (Windows would otherwise produce `real-world\x`).
+    const rel = relative(corpusRoot, file).replaceAll("\\", "/");
     const text = readFileSync(file, "utf-8");
 
     describe(rel, () => {
