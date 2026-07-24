@@ -6,13 +6,16 @@ import { parseDotenv } from "./environments/dotenv";
 import { EnvironmentManager } from "./environments/manager";
 import { parseHttpFile, requestAtLine, type HttpRequest } from "./parser/httpParser";
 import { resolveRequest } from "./variables/resolver";
+import { ResponseStore } from "./variables/responseStore";
 import { ResponsePanel } from "./ui/responsePanel";
 
 let activeAbort: AbortController | undefined;
 let environments: EnvironmentManager;
+let responses: ResponseStore;
 
 export function activate(context: vscode.ExtensionContext): void {
   environments = new EnvironmentManager(context);
+  responses = new ResponseStore();
   context.subscriptions.push(
     vscode.languages.registerCodeLensProvider(
       { language: "http" },
@@ -64,6 +67,7 @@ async function sendRequest(atLine?: number): Promise<void> {
     fileVariables: file.variables,
     environmentVariables: environments.variables(),
     dotenvVariables: await loadDotenv(editor.document),
+    responses,
   });
 
   activeAbort?.abort();
@@ -77,6 +81,9 @@ async function sendRequest(atLine?: number): Promise<void> {
       followRedirects: config.get<boolean>("followRedirects", true),
       signal: abort.signal,
     });
+    if (request.name) {
+      responses.save(request.name, { request: resolved, response });
+    }
     panel.renderResponse(resolved, response);
   } catch (error) {
     if (abort.signal.aborted) {
