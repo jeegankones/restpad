@@ -24,7 +24,7 @@ UX, and cross-platform. A milestone is not done until its layer here is green.
 6. **UX audits**: periodic pass against VS Code UX guidelines (theming in
    light/dark/high-contrast, keyboard-only operation, screen-reader labels on
    webview). Manual smoke via Extension Development Host with a scripted
-   checklist in `test/UX_CHECKLIST.md`.
+   checklist in `docs/UX_CHECKLIST.md` (kept local, not part of the repo).
 7. **Security**: webview CSP locked down; HTML-escape all response content
    (responses are attacker-controlled input); no secrets written to logs or
    history files; license checks fail open for availability, closed for tamper.
