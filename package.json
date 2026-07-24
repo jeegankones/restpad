@@ -1,0 +1,104 @@
+{
+  "name": "restpad",
+  "displayName": "Restpad — REST API Client",
+  "description": "Fast, offline REST API client. Open .http files and send requests instantly. No account, no cloud, no paywall surprises. Compatible with REST Client syntax.",
+  "version": "0.0.1",
+  "publisher": "restpad",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": true,
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Testing",
+    "Other"
+  ],
+  "keywords": [
+    "rest client",
+    "http client",
+    "api client",
+    "rest",
+    "http",
+    "api",
+    "graphql",
+    "postman",
+    "thunder client",
+    "rest-client"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeegankones/restpad"
+  },
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "languages": [
+      {
+        "id": "http",
+        "aliases": [
+          "HTTP",
+          "http"
+        ],
+        "extensions": [
+          ".http",
+          ".rest"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "http",
+        "scopeName": "source.http",
+        "path": "./syntaxes/http.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "restpad.sendRequest",
+        "title": "Restpad: Send Request"
+      },
+      {
+        "command": "restpad.cancelRequest",
+        "title": "Restpad: Cancel Request"
+      }
+    ],
+    "configuration": {
+      "title": "Restpad",
+      "properties": {
+        "restpad.timeout": {
+          "type": "number",
+          "default": 30000,
+          "description": "Request timeout in milliseconds."
+        },
+        "restpad.followRedirects": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically follow HTTP redirects."
+        },
+        "restpad.environmentVariables": {
+          "type": "object",
+          "default": {},
+          "description": "Environment variables, keyed by environment name. Use \"$shared\" for variables available in every environment. Compatible with rest-client.environmentVariables."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "undici": "^7.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/vscode": "^1.90.0",
+    "esbuild": "^0.25.5",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.0"
+  }
+}
