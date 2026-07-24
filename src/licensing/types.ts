@@ -1,7 +1,6 @@
 /**
  * Licensing model. Free features never pass through this module — only Pro
- * features are gated, so a licensing bug can never break the free tier
- * (principle #1 in PLAN.md).
+ * features are gated, so a licensing bug can never break the free tier.
  */
 
 export type ProFeature =
