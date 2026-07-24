@@ -61,6 +61,10 @@
       {
         "command": "restpad.cancelRequest",
         "title": "Restpad: Cancel Request"
+      },
+      {
+        "command": "restpad.switchEnvironment",
+        "title": "Restpad: Switch Environment"
       }
     ],
     "configuration": {

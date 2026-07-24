@@ -5,6 +5,10 @@ export interface ResolveContext {
   fileVariables: FileVariable[];
   /** Active environment variables, already merged with $shared. */
   environmentVariables: Record<string, string>;
+  /** Variables from a .env file next to the .http file ({{$dotenv NAME}}). */
+  dotenvVariables?: Record<string, string>;
+  /** Process environment for {{$processEnv NAME}}; defaults to process.env. */
+  processEnv?: Record<string, string | undefined>;
 }
 
 const VARIABLE_REF = /\{\{([^{}]+)\}\}/g;
@@ -32,16 +36,26 @@ export function resolveText(text: string, ctx: ResolveContext): string {
 }
 
 function resolveOne(name: string, ctx: ResolveContext): string | undefined {
-  if (name.startsWith("$")) return resolveSystemVariable(name);
+  if (name.startsWith("$")) return resolveSystemVariable(name, ctx);
   const fileVariable = [...ctx.fileVariables].reverse().find((v) => v.name === name);
   if (fileVariable) return fileVariable.value;
   if (name in ctx.environmentVariables) return ctx.environmentVariables[name];
   return undefined;
 }
 
-function resolveSystemVariable(name: string): string | undefined {
+function resolveSystemVariable(name: string, ctx: ResolveContext): string | undefined {
   const [keyword, ...args] = name.split(/\s+/);
   switch (keyword) {
+    case "$processEnv": {
+      const key = args[0];
+      if (!key) return undefined;
+      return (ctx.processEnv ?? process.env)[key];
+    }
+    case "$dotenv": {
+      const key = args[0];
+      if (!key) return undefined;
+      return ctx.dotenvVariables?.[key];
+    }
     case "$guid":
       return randomUUID();
     case "$timestamp":

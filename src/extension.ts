@@ -1,12 +1,18 @@
+import { readFile } from "node:fs/promises";
+import * as path from "node:path";
 import * as vscode from "vscode";
 import { executeRequest } from "./engine/client";
+import { parseDotenv } from "./environments/dotenv";
+import { EnvironmentManager } from "./environments/manager";
 import { parseHttpFile, requestAtLine, type HttpRequest } from "./parser/httpParser";
 import { resolveRequest } from "./variables/resolver";
 import { ResponsePanel } from "./ui/responsePanel";
 
 let activeAbort: AbortController | undefined;
+let environments: EnvironmentManager;
 
 export function activate(context: vscode.ExtensionContext): void {
+  environments = new EnvironmentManager(context);
   context.subscriptions.push(
     vscode.languages.registerCodeLensProvider(
       { language: "http" },
@@ -56,7 +62,8 @@ async function sendRequest(atLine?: number): Promise<void> {
   const config = vscode.workspace.getConfiguration("restpad");
   const resolved = resolveRequest(request, {
     fileVariables: file.variables,
-    environmentVariables: activeEnvironmentVariables(config),
+    environmentVariables: environments.variables(),
+    dotenvVariables: await loadDotenv(editor.document),
   });
 
   activeAbort?.abort();
@@ -80,13 +87,15 @@ async function sendRequest(atLine?: number): Promise<void> {
   }
 }
 
-function activeEnvironmentVariables(
-  config: vscode.WorkspaceConfiguration,
-): Record<string, string> {
-  // Environment switching UI lands with the environments milestone; until
-  // then, $shared variables apply so shared setups already work.
-  const all = config.get<Record<string, Record<string, string>>>("environmentVariables", {});
-  return { ...all["$shared"] };
+/** Read a .env file sitting next to the .http file, if any (REST Client compat). */
+async function loadDotenv(document: vscode.TextDocument): Promise<Record<string, string>> {
+  if (document.uri.scheme !== "file") return {};
+  try {
+    const envPath = path.join(path.dirname(document.uri.fsPath), ".env");
+    return parseDotenv(await readFile(envPath, "utf8"));
+  } catch {
+    return {};
+  }
 }
 
 export type { HttpRequest };
