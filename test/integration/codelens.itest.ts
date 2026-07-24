@@ -38,8 +38,13 @@ describe("code lenses", () => {
     );
 
     assert.ok(Array.isArray(lenses), "expected an array of code lenses");
-    assert.strictEqual(lenses.length, 3, "expected 3 lenses for 3 requests");
-    for (const lens of lenses) {
+    assert.strictEqual(lenses.length, 4, "expected Send All + 3 per-request lenses");
+
+    const sendAll = lenses[0];
+    assert.strictEqual(sendAll.command?.title, "▶▶ Send All (3)");
+    assert.strictEqual(sendAll.command?.command, "restpad.sendAllRequests");
+
+    for (const lens of lenses.slice(1)) {
       assert.strictEqual(lens.command?.title, "▶ Send Request");
       assert.strictEqual(lens.command?.command, "restpad.sendRequest");
     }
