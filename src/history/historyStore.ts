@@ -11,7 +11,7 @@ export interface HistoryEntry {
 /**
  * In-memory ring of recent request/response pairs, newest first.
  * Session-scoped; persistence is a deliberate non-goal until there is
- * evidence users want history to survive reloads (BUSINESS.md rule).
+ * evidence users want history to survive reloads.
  */
 export class HistoryStore {
   private entries: HistoryEntry[] = [];

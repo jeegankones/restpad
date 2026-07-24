@@ -4,7 +4,7 @@ import type { LicenseValidator, ValidationResult } from "./types";
  * License validation against Polar.sh's license-key API.
  *
  * NOTE: the organization id is not yet real — the Polar account is a human
- * blocker (BLOCKERS.md #3). The endpoint shape follows Polar's documented
+ * blocker. The endpoint shape follows Polar's documented
  * customer-portal license-key API; re-verify request/response fields against
  * the live docs at M4 before enabling. Until then, tests use MockValidator.
  */
