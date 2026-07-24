@@ -1,0 +1,6 @@
+#!/bin/sh
+# Refuse to push unless the fast verification gate passes.
+set -e
+echo "pre-push: typecheck + unit tests"
+npm run --silent typecheck
+npm test --silent
