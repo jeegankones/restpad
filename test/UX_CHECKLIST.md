@@ -5,14 +5,14 @@ any marketplace publish. Every box must pass in Dark Modern, Light Modern,
 and a high-contrast theme.
 
 ## Core flow
-- [ ] Open `examples/demo.http` — syntax highlighting renders; CodeLens
+- [ ] Open `examples/demo.http`: syntax highlighting renders; CodeLens
       appears within 1s
-- [ ] Send a request — response panel opens beside, loading spinner shows,
+- [ ] Send a request: response panel opens beside, loading spinner shows,
       result renders with correct status color
-- [ ] Cancel a slow request — panel shows "cancelled", no error toast
-- [ ] Send All — progress notification with working cancel; summary table
+- [ ] Cancel a slow request: panel shows "cancelled", no error toast
+- [ ] Send All: progress notification with working cancel; summary table
       matches per-request results
-- [ ] Malformed request (no URL) — warning toast, no crash, no console error
+- [ ] Malformed request (no URL): warning toast, no crash, no console error
 
 ## Keyboard & accessibility
 - [ ] Response tabs reachable by Tab; arrow keys move between tabs
@@ -34,4 +34,4 @@ and a high-contrast theme.
 - [ ] 1000-request file (test corpus generator) scrolls and lenses smoothly
 - [ ] 5MB JSON response renders without freezing the window
 
-Last run: never — required before first publish.
+Last run: never. Required before first publish.

@@ -21,7 +21,7 @@ export type Executor = (
  * Run every request in the file sequentially, top to bottom. Named requests
  * populate the response store as they complete, so chained references to
  * earlier requests resolve naturally. Failures are recorded and execution
- * continues — a run-all is a smoke pass, not a transaction.
+ * continues; a run-all is a smoke pass, not a transaction.
  */
 export async function runAll(
   file: HttpFile,

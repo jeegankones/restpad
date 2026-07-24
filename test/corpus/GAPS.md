@@ -10,7 +10,7 @@ the "request line ⇒ ≥1 request" assertion but still snapshot-tracked).
 
 ---
 
-## 2. Request/response handler scripts `> {% … %}` and `< {% … %}` (LOW — dialect)
+## 2. Request/response handler scripts `> {% … %}` and `< {% … %}` (LOW, dialect)
 
 IntelliJ HTTP Client / httpyac attach pre-request scripts and response handlers
 to a request. REST Client itself does **not** support these, so this is a

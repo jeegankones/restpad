@@ -12,7 +12,7 @@ export interface StoredResponse {
 
 /**
  * In-memory store mapping a request name to the most recent execution of that
- * request. Enables REST Client "Request Variables" — referencing a previous
+ * request. Enables REST Client "Request Variables", referencing a previous
  * named response like `{{login.response.body.$.token}}`.
  *
  * Pure and free of vscode dependencies so it can be unit-tested and shared

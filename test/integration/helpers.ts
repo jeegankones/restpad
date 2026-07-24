@@ -1,6 +1,6 @@
 /**
  * Poll `predicate` until it returns true or the timeout elapses. Used instead
- * of fixed sleeps so tests stay robust to VS Code / request timing.
+ * of fixed sleeps so tests are not sensitive to VS Code / request timing.
  */
 export async function waitUntil(
   predicate: () => boolean | Promise<boolean>,
