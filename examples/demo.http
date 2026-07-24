@@ -1,0 +1,37 @@
+# Restpad demo — every core feature in one file.
+# Click "▶▶ Send All" at the top, or "▶ Send Request" on any block.
+
+@baseUrl = https://jsonplaceholder.typicode.com
+
+### Simple GET with headers
+GET {{baseUrl}}/users/1
+Accept: application/json
+
+### Named request — its response feeds later requests
+# @name firstPost
+GET {{baseUrl}}/posts/1
+
+### Request chaining: reference the previous response
+GET {{baseUrl}}/users/{{firstPost.response.body.$.userId}}
+
+### POST with a JSON body and dynamic system variables
+POST {{baseUrl}}/posts
+Content-Type: application/json
+
+{
+  "title": "Sent from Restpad",
+  "requestId": "{{$guid}}",
+  "sentAt": "{{$datetime iso8601}}"
+}
+
+### Query continuation lines
+GET {{baseUrl}}/comments
+    ?postId=1
+    &_limit=3
+
+### Paste a curl command — it just works
+curl -X POST {{baseUrl}}/posts -H "Content-Type: application/json" -d '{"title":"from curl"}'
+
+### Redirect control
+# @no-redirect
+GET https://httpbin.org/redirect/1
