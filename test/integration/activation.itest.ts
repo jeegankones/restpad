@@ -1,8 +1,6 @@
 import * as assert from "node:assert";
 import * as vscode from "vscode";
-import { waitUntil } from "./helpers";
-
-const EXTENSION_ID = "restpad.restpad";
+import { EXTENSION_ID, waitUntil } from "./helpers";
 
 describe("activation", () => {
   it("activates when a .http document is opened and registers its commands", async () => {

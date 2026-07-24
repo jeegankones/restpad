@@ -10,14 +10,14 @@ const STATE_KEY = "restpad.licenseState";
 /**
  * Holds license state: key in SecretStorage, validation metadata in
  * globalState. Uses MockValidator (always invalid) until the Polar account
- * exists — entering a key today reports "not yet available" honestly.
+ * exists; entering a key today reports "not yet available" honestly.
  */
 export class LicenseManager {
   constructor(
     private readonly context: vscode.ExtensionContext,
     private readonly validator: LicenseValidator = new MockValidator({
       valid: false,
-      reason: "Restpad Pro is not available yet — licensing opens at launch.",
+      reason: "Restpad Pro is not available yet. Licensing opens at launch.",
     }),
   ) {}
 
@@ -79,7 +79,7 @@ export class LicenseManager {
         validatedAt: Date.now(),
         expiresAt: result.expiresAt,
       });
-      void vscode.window.showInformationMessage("Restpad Pro activated — thank you!");
+      void vscode.window.showInformationMessage("Restpad Pro activated. Thank you!");
     } catch {
       void vscode.window.showErrorMessage(
         "Restpad: could not reach the license server. Check your connection and try again.",

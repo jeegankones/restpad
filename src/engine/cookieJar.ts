@@ -1,6 +1,6 @@
 /**
  * Minimal in-memory cookie jar (RFC 6265 subset): domain and path matching,
- * Expires/Max-Age expiry, Secure. Session-scoped — REST Client-style
+ * Expires/Max-Age expiry, Secure. Session-scoped, REST Client-style
  * persistence across restarts is deliberately not implemented yet.
  */
 

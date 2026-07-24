@@ -172,7 +172,10 @@ export class ResponsePanel {
 
   .statusline {
     display: flex; align-items: center; gap: 8px;
-    padding: 12px 0 10px;
+    /* Bleed across the body's horizontal padding so the sticky bar's
+       background covers the full panel width while content scrolls under. */
+    margin: 0 -14px;
+    padding: 12px 14px 10px;
     border-bottom: 1px solid var(--vscode-widget-border, transparent);
     position: sticky; top: 0;
     background: var(--vscode-editor-background);
@@ -242,6 +245,10 @@ export class ResponsePanel {
   table { border-collapse: collapse; width: 100%; }
   td { padding: 4px 10px; border-bottom: 1px solid var(--vscode-widget-border, #4443); vertical-align: top; }
   td:first-child { font-weight: 600; white-space: nowrap; opacity: 0.9; }
+
+  .run-summary td { padding: 8px 10px; }
+  .run-summary td:nth-child(2) { word-break: break-word; }
+  .run-summary .detail { white-space: nowrap; text-align: right; opacity: 0.75; }
 
   .state { padding: 24px 0; opacity: 0.75; display: flex; align-items: center; gap: 8px; }
   .empty-body { padding: 18px 0; opacity: 0.65; font-style: italic; }

@@ -1,10 +1,10 @@
-# Restpad — REST API Client for VS Code
+# Restpad: REST API Client for VS Code
 
 Fast, offline REST API client. Open a `.http` file and send requests
 instantly. **No account. No cloud sync you didn't ask for. No paywall
 surprises.**
 
-> Drop-in compatible with REST Client `.http`/`.rest` syntax — your existing
+> Drop-in compatible with REST Client `.http`/`.rest` syntax. Your existing
 > files just work.
 
 ## Quick start
@@ -31,8 +31,8 @@ Click **▶ Send Request** above any request (or run *Restpad: Send Request*).
 
 ## Features
 
-- `.http` / `.rest` files with REST Client-compatible syntax — existing files
-  just work, including pasted `curl` commands
+- `.http` / `.rest` files with REST Client-compatible syntax, including
+  pasted `curl` commands
 - **Send All**: run every request in a file sequentially, with a pass/fail summary
 - **Request chaining**: `{{login.response.body.$.token}}` references to earlier
   responses, headers included
@@ -40,11 +40,12 @@ Click **▶ Send Request** above any request (or run *Restpad: Send Request*).
   and `$guid` / `$timestamp` / `$randomInt` / `$datetime` / `$processEnv` /
   `$dotenv` system variables (compatible with `rest-client.environmentVariables`)
 - Response viewer: status, timing, size, syntax-highlighted JSON, header and
-  request tabs, copy button — native to your theme, light/dark/high-contrast
+  request tabs, copy button. Matches your theme in light, dark, and
+  high-contrast
 - Session cookie jar (`# @no-cookie-jar` to bypass), redirect control
   (`# @no-redirect`), cancellation, timeouts
 - Request history and save-response-to-file
-- Works fully offline — your requests never touch our servers (we don't have any)
+- Works fully offline. Your requests never touch our servers (we don't have any)
 
 Try it: open [`examples/demo.http`](examples/demo.http).
 

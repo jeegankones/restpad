@@ -1,9 +1,9 @@
 {
   "name": "restpad",
-  "displayName": "Restpad — REST API Client",
-  "description": "Fast, offline REST API client for .http files — REST Client compatible. No account, no cloud, no paywall. Environments, variables, request chaining, cookies, curl import.",
+  "displayName": "Restpad - REST API Client",
+  "description": "Fast, offline REST API client for .http files. REST Client compatible. No account, no cloud, no paywall. Environments, variables, request chaining, cookies, curl import.",
   "version": "0.0.1",
-  "publisher": "restpad",
+  "publisher": "KeeganJones",
   "license": "SEE LICENSE IN LICENSE",
   "private": true,
   "engines": {
