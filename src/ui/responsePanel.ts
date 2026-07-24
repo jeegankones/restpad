@@ -1,15 +1,25 @@
+import { randomBytes } from "node:crypto";
 import * as vscode from "vscode";
 import type { ResponseData } from "../engine/client";
 import type { HttpRequest } from "../parser/httpParser";
 import type { ResolvedRequest } from "../variables/resolver";
+import {
+  escapeHtml,
+  formatDuration,
+  formatSize,
+  renderBody,
+  statusClass,
+} from "./format";
 
 /**
- * Webview panel showing the response for the most recent request.
- * A single reusable panel, like REST Client's response view.
+ * Webview panel showing the response for the most recent request. A single
+ * reusable panel beside the editor, styled entirely with VS Code theme
+ * variables so light/dark/high-contrast all render correctly.
  */
 export class ResponsePanel {
   private static current: ResponsePanel | undefined;
   private readonly panel: vscode.WebviewPanel;
+  private lastRawBody = "";
 
   static show(request: HttpRequest): ResponsePanel {
     const title = `${request.method} ${truncate(request.url, 40)}`;
@@ -23,7 +33,7 @@ export class ResponsePanel {
       "restpad.response",
       title,
       { viewColumn: vscode.ViewColumn.Beside, preserveFocus: true },
-      { enableScripts: false },
+      { enableScripts: true, retainContextWhenHidden: true },
     );
     ResponsePanel.current = new ResponsePanel(panel);
     ResponsePanel.current.renderLoading();
@@ -35,25 +45,37 @@ export class ResponsePanel {
     panel.onDidDispose(() => {
       if (ResponsePanel.current === this) ResponsePanel.current = undefined;
     });
+    panel.webview.onDidReceiveMessage((message: { command?: string }) => {
+      if (message.command === "copyBody") {
+        void vscode.env.clipboard.writeText(this.lastRawBody);
+        void vscode.window.setStatusBarMessage("Restpad: response body copied", 2000);
+      }
+    });
   }
 
   renderLoading(): void {
-    this.panel.webview.html = page("<p class='muted'>Sending request…</p>");
-  }
-
-  renderCancelled(): void {
-    this.panel.webview.html = page("<p class='muted'>Request cancelled.</p>");
-  }
-
-  renderError(error: Error): void {
-    this.panel.webview.html = page(
-      `<p class="status error">Request failed</p><pre>${escapeHtml(error.message)}</pre>`,
+    this.panel.webview.html = this.page(
+      `<div class="state"><span class="spinner"></span>Sending request…</div>`,
     );
   }
 
+  renderCancelled(): void {
+    this.panel.webview.html = this.page(`<div class="state">Request cancelled.</div>`);
+  }
+
+  renderError(error: Error): void {
+    this.panel.webview.html = this.page(`
+      <div class="statusline">
+        <span class="status server-error">Request failed</span>
+      </div>
+      <pre class="error-detail">${escapeHtml(error.message)}</pre>`);
+  }
+
   renderResponse(request: ResolvedRequest, response: ResponseData): void {
-    const statusClass =
-      response.status < 300 ? "ok" : response.status < 400 ? "redirect" : "error";
+    const contentType = String(response.headers["content-type"] ?? "");
+    this.lastRawBody = response.body.toString("utf8");
+    const body = renderBody(response.body, contentType);
+
     const headerRows = Object.entries(response.headers)
       .map(
         ([name, value]) =>
@@ -63,89 +85,169 @@ export class ResponsePanel {
       )
       .join("");
 
-    this.panel.webview.html = page(`
-      <p>
-        <span class="status ${statusClass}">${response.status} ${escapeHtml(response.statusText)}</span>
-        <span class="muted">${response.durationMs.toFixed(0)} ms · ${formatSize(response.bodySize)}</span>
-      </p>
-      <pre>${escapeHtml(formatBody(response))}</pre>
-      <details>
-        <summary>Response headers (${Object.keys(response.headers).length})</summary>
-        <table>${headerRows}</table>
-      </details>
-      <details>
-        <summary>Request</summary>
-        <pre>${escapeHtml(`${request.method} ${request.url}`)}</pre>
-      </details>
-    `);
-  }
-}
+    const rawRequest = [
+      `${request.method} ${request.url}`,
+      ...request.headers.map((h) => `${h.name}: ${h.value}`),
+      ...(request.body ? ["", request.body] : []),
+    ].join("\n");
 
-function formatBody(response: ResponseData): string {
-  const contentType = String(response.headers["content-type"] ?? "");
-  const text = response.body.toString("utf8");
-  if (contentType.includes("json")) {
-    try {
-      return JSON.stringify(JSON.parse(text), null, 2);
-    } catch {
-      return text;
-    }
+    this.panel.webview.html = this.page(`
+      <div class="statusline">
+        <span class="status ${statusClass(response.status)}">${response.status}${
+          response.statusText ? " " + escapeHtml(response.statusText) : ""
+        }</span>
+        <span class="chip">${formatDuration(response.durationMs)}</span>
+        <span class="chip">${formatSize(response.bodySize)}</span>
+        <button class="copy" id="copy-body" title="Copy response body">Copy</button>
+      </div>
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-tab="body">${escapeHtml(body.label)}</button>
+        <button role="tab" aria-selected="false" data-tab="headers">Headers <span class="count">${
+          Object.keys(response.headers).length
+        }</span></button>
+        <button role="tab" aria-selected="false" data-tab="request">Request</button>
+      </div>
+      <section data-panel="body" class="active">${body.html}</section>
+      <section data-panel="headers"><table>${headerRows}</table></section>
+      <section data-panel="request"><pre>${escapeHtml(rawRequest)}</pre></section>`);
   }
-  if (isProbablyBinary(response.body)) {
-    return `<binary response: ${formatSize(response.bodySize)}, ${contentType || "unknown type"}>`;
-  }
-  return text;
-}
 
-function isProbablyBinary(buffer: Buffer): boolean {
-  const sample = buffer.subarray(0, 1024);
-  let suspicious = 0;
-  for (const byte of sample) {
-    if (byte === 0) return true;
-    if (byte < 9 || (byte > 13 && byte < 32)) suspicious++;
+  private page(content: string): string {
+    const nonce = randomBytes(16).toString("base64");
+    const csp = `default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-${nonce}';`;
+    return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="${csp}">
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font-family: var(--vscode-editor-font-family, monospace);
+    font-size: var(--vscode-editor-font-size, 13px);
+    color: var(--vscode-editor-foreground);
+    padding: 0 14px 14px;
+    animation: appear 120ms ease-out;
   }
-  return sample.length > 0 && suspicious / sample.length > 0.1;
-}
+  @keyframes appear { from { opacity: 0; transform: translateY(2px); } }
 
-function formatSize(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  .statusline {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 0 10px;
+    border-bottom: 1px solid var(--vscode-widget-border, transparent);
+    position: sticky; top: 0;
+    background: var(--vscode-editor-background);
+  }
+  .status {
+    font-weight: 700; letter-spacing: 0.02em;
+    padding: 2px 10px; border-radius: 3px;
+    border: 1px solid transparent;
+  }
+  .status.ok { color: var(--vscode-testing-iconPassed, #2da042); border-color: currentColor; }
+  .status.redirect { color: var(--vscode-charts-yellow, #c8a000); border-color: currentColor; }
+  .status.client-error,
+  .status.server-error { color: var(--vscode-testing-iconFailed, #e05252); border-color: currentColor; }
+  .chip {
+    opacity: 0.75; font-size: 0.92em;
+    padding: 2px 8px; border-radius: 999px;
+    background: var(--vscode-badge-background, #4443);
+    color: var(--vscode-badge-foreground, inherit);
+  }
+  .copy {
+    margin-left: auto;
+    font: inherit; font-size: 0.92em;
+    color: var(--vscode-button-secondaryForeground, inherit);
+    background: var(--vscode-button-secondaryBackground, transparent);
+    border: 1px solid var(--vscode-widget-border, currentColor);
+    border-radius: 3px; padding: 2px 10px; cursor: pointer;
+  }
+  .copy:hover { background: var(--vscode-button-secondaryHoverBackground, #6663); }
+  .copy:focus-visible, [role="tab"]:focus-visible {
+    outline: 2px solid var(--vscode-focusBorder); outline-offset: 1px;
+  }
+
+  .tabs { display: flex; gap: 2px; margin: 10px 0 0; }
+  [role="tab"] {
+    font: inherit; cursor: pointer;
+    color: inherit; opacity: 0.65;
+    background: none; border: none;
+    padding: 4px 10px 6px;
+    border-bottom: 2px solid transparent;
+  }
+  [role="tab"][aria-selected="true"] {
+    opacity: 1;
+    border-bottom-color: var(--vscode-focusBorder, currentColor);
+  }
+  .count {
+    font-size: 0.85em; opacity: 0.8;
+    background: var(--vscode-badge-background, #4443);
+    color: var(--vscode-badge-foreground, inherit);
+    border-radius: 999px; padding: 0 6px; margin-left: 2px;
+  }
+
+  section { display: none; padding-top: 8px; }
+  section.active { display: block; }
+
+  pre {
+    margin: 0;
+    background: var(--vscode-textCodeBlock-background, #8881 );
+    padding: 12px; border-radius: 4px;
+    overflow: auto; white-space: pre-wrap; word-break: break-word;
+    line-height: 1.5;
+  }
+  .tok-key { color: var(--vscode-debugTokenExpression-name, #9cdcfe); }
+  .tok-str { color: var(--vscode-debugTokenExpression-string, #ce9178); }
+  .tok-num { color: var(--vscode-debugTokenExpression-number, #b5cea8); }
+  .tok-bool { color: var(--vscode-debugTokenExpression-boolean, #569cd6); }
+
+  table { border-collapse: collapse; width: 100%; }
+  td { padding: 4px 10px; border-bottom: 1px solid var(--vscode-widget-border, #4443); vertical-align: top; }
+  td:first-child { font-weight: 600; white-space: nowrap; opacity: 0.9; }
+
+  .state { padding: 24px 0; opacity: 0.75; display: flex; align-items: center; gap: 8px; }
+  .empty-body { padding: 18px 0; opacity: 0.65; font-style: italic; }
+  .error-detail { margin-top: 10px; }
+  .spinner {
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid currentColor; border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    body { animation: none; }
+    .spinner { animation-duration: 2s; }
+  }
+</style>
+</head>
+<body>
+${content}
+<script nonce="${nonce}">
+  const vscodeApi = acquireVsCodeApi();
+  for (const tab of document.querySelectorAll('[role="tab"]')) {
+    tab.addEventListener("click", () => {
+      for (const t of document.querySelectorAll('[role="tab"]'))
+        t.setAttribute("aria-selected", String(t === tab));
+      for (const p of document.querySelectorAll("section[data-panel]"))
+        p.classList.toggle("active", p.dataset.panel === tab.dataset.tab);
+    });
+    tab.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+      const tabs = [...document.querySelectorAll('[role="tab"]')];
+      const index = tabs.indexOf(tab);
+      const next = tabs[(index + (event.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+      next.focus();
+      next.click();
+    });
+  }
+  document.getElementById("copy-body")?.addEventListener("click", () => {
+    vscodeApi.postMessage({ command: "copyBody" });
+  });
+</script>
+</body>
+</html>`;
+  }
 }
 
 function truncate(text: string, max: number): string {
   return text.length > max ? `${text.slice(0, max)}…` : text;
-}
-
-function escapeHtml(text: string): string {
-  return text
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
-
-function page(content: string): string {
-  return `<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline';">
-<style>
-  body { font-family: var(--vscode-editor-font-family); font-size: 13px; padding: 0 12px; }
-  pre { background: var(--vscode-textCodeBlock-background); padding: 10px; border-radius: 4px; overflow: auto; white-space: pre-wrap; word-break: break-word; }
-  .status { font-weight: 600; padding: 2px 8px; border-radius: 4px; }
-  .status.ok { background: rgba(0, 160, 60, 0.2); color: var(--vscode-testing-iconPassed, #2da042); }
-  .status.redirect { background: rgba(200, 160, 0, 0.2); }
-  .status.error { background: rgba(200, 40, 40, 0.2); color: var(--vscode-testing-iconFailed, #e05252); }
-  .muted { opacity: 0.7; margin-left: 8px; }
-  table { border-collapse: collapse; width: 100%; }
-  td { padding: 3px 8px; border-bottom: 1px solid var(--vscode-widget-border, #4444); vertical-align: top; }
-  td:first-child { font-weight: 600; white-space: nowrap; }
-  details { margin: 10px 0; }
-  summary { cursor: pointer; opacity: 0.8; }
-</style>
-</head>
-<body>${content}</body>
-</html>`;
 }
