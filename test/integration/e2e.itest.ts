@@ -60,7 +60,17 @@ describe("end-to-end sendRequest", () => {
     (vscode.window as { showErrorMessage: unknown }).showErrorMessage = originalError;
     (vscode.window as { showWarningMessage: unknown }).showWarningMessage = originalWarning;
     await server.stop();
-    if (tempDir) await rm(tempDir, { recursive: true, force: true });
+    // Windows: VS Code can still hold locks on the opened file; close editors,
+    // retry the removal, and tolerate a leaked temp dir rather than failing
+    // the suite over cleanup.
+    await vscode.commands.executeCommand("workbench.action.closeAllEditors");
+    if (tempDir) {
+      try {
+        await rm(tempDir, { recursive: true, force: true, maxRetries: 8, retryDelay: 150 });
+      } catch {
+        // best-effort cleanup only
+      }
+    }
   });
 
   it("sends a request against the fixture server and opens a response webview without error", async () => {
