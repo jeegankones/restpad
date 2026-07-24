@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import * as path from "node:path";
 import * as vscode from "vscode";
 import { executeRequest } from "./engine/client";
+import { CookieJar } from "./engine/cookieJar";
 import { parseDotenv } from "./environments/dotenv";
 import { EnvironmentManager } from "./environments/manager";
 import { parseHttpFile, requestAtLine, type HttpRequest } from "./parser/httpParser";
@@ -12,10 +13,12 @@ import { ResponsePanel } from "./ui/responsePanel";
 let activeAbort: AbortController | undefined;
 let environments: EnvironmentManager;
 let responses: ResponseStore;
+let cookieJar: CookieJar;
 
 export function activate(context: vscode.ExtensionContext): void {
   environments = new EnvironmentManager(context);
   responses = new ResponseStore();
+  cookieJar = new CookieJar();
   context.subscriptions.push(
     vscode.languages.registerCodeLensProvider(
       { language: "http" },
@@ -80,6 +83,7 @@ async function sendRequest(atLine?: number): Promise<void> {
       timeoutMs: config.get<number>("timeout", 30000),
       followRedirects: config.get<boolean>("followRedirects", true),
       signal: abort.signal,
+      cookieJar,
     });
     if (request.name) {
       responses.save(request.name, { request: resolved, response });

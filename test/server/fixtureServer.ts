@@ -83,6 +83,26 @@ export class FixtureServer {
         response.setHeader("content-type", "application/octet-stream");
         response.end(Buffer.alloc(1024));
         return;
+      case "set-cookie": {
+        // /set-cookie?session=abc&flavor=oat → two Set-Cookie headers.
+        const headers = [...url.searchParams.entries()].map(
+          ([name, value]) => `${name}=${value}; Path=/`,
+        );
+        response.setHeader("set-cookie", headers);
+        response.end("cookies set");
+        return;
+      }
+      case "cookies":
+        response.setHeader("content-type", "application/json");
+        response.end(JSON.stringify({ cookie: request.headers.cookie ?? null }));
+        return;
+      case "set-cookie-redirect":
+        // Sets a cookie and redirects to /cookies (tests jar across hops).
+        response.statusCode = 302;
+        response.setHeader("set-cookie", "hop=1; Path=/");
+        response.setHeader("location", "/cookies");
+        response.end();
+        return;
       default:
         response.statusCode = 404;
         response.end("not found");

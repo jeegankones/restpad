@@ -1,11 +1,13 @@
 import { performance } from "node:perf_hooks";
 import { request as undiciRequest } from "undici";
 import type { ResolvedRequest } from "../variables/resolver";
+import type { CookieJar } from "./cookieJar";
 
 export interface ExecuteOptions {
   timeoutMs: number;
   followRedirects: boolean;
   signal?: AbortSignal;
+  cookieJar?: CookieJar;
 }
 
 export interface ResponseData {
@@ -42,13 +44,32 @@ export async function executeRequest(
   let method = resolved.method;
   let body: string | undefined = resolved.body;
 
+  // The jar is bypassed entirely when the user sends an explicit Cookie
+  // header or sets # @no-cookie-jar (REST Client behavior).
+  const jar =
+    resolved.directives["no-cookie-jar"] === true ||
+    resolved.headers.some((h) => h.name.toLowerCase() === "cookie")
+      ? undefined
+      : options.cookieJar;
+
   for (let hop = 0; ; hop++) {
+    const hopHeaders = { ...headers };
+    const cookieHeader = jar?.cookieHeader(url);
+    if (cookieHeader) hopHeaders["Cookie"] = cookieHeader;
+
     const response = await undiciRequest(url, {
       method: method as never,
-      headers,
+      headers: hopHeaders,
       body,
       signal,
     });
+
+    if (jar) {
+      const setCookie = response.headers["set-cookie"];
+      if (setCookie) {
+        jar.storeFromResponse(url, Array.isArray(setCookie) ? setCookie : [setCookie]);
+      }
+    }
 
     if (followRedirects && REDIRECT_STATUSES.has(response.statusCode) && hop < MAX_REDIRECTS) {
       const location = response.headers["location"];
