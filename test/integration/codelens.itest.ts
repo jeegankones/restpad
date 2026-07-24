@@ -41,6 +41,7 @@ describe("code lenses", () => {
     assert.strictEqual(lenses.length, 4, "expected Send All + 3 per-request lenses");
 
     const sendAll = lenses[0];
+    assert.ok(sendAll, "expected a file-top Send All lens");
     assert.strictEqual(sendAll.command?.title, "▶▶ Send All (3)");
     assert.strictEqual(sendAll.command?.command, "restpad.sendAllRequests");
 
