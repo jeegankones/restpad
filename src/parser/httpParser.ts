@@ -21,6 +21,13 @@ export interface BodyFileRef {
   path: string;
   /** `<@ ./file` — process variables inside the referenced file. */
   processVariables: boolean;
+  /** `<@latin1 ./file` — file encoding override; defaults to utf8. */
+  encoding?: string;
+}
+
+export interface PromptVariable {
+  name: string;
+  description?: string;
 }
 
 export interface HttpRequest {
@@ -34,6 +41,8 @@ export interface HttpRequest {
   bodyFile?: BodyFileRef;
   /** `# @key value` directives, e.g. no-redirect, no-cookie-jar. */
   directives: Record<string, string | true>;
+  /** `# @prompt name [description]` — one entry per prompt line. */
+  prompts: PromptVariable[];
   /** 0-based, inclusive. Used for CodeLens placement and cursor lookup. */
   startLine: number;
   endLine: number;
@@ -53,7 +62,7 @@ const REQUEST_LINE =
   /^(?:(GET|POST|PUT|DELETE|PATCH|HEAD|OPTIONS|TRACE|CONNECT|LOCK|UNLOCK|PROPFIND|PROPPATCH|COPY|MOVE|MKCOL|MKCALENDAR|ACL|SEARCH)\s+)?(.+?)(?:\s+(HTTP\/[\d.]+))?\s*$/i;
 const HEADER_LINE = /^([\w-]+)\s*:\s*(.*)$/;
 const QUERY_CONTINUATION = /^\s+[?&]/;
-const BODY_FILE_REF = /^<(@)?\s+(.+)$/;
+const BODY_FILE_REF = /^<(?:@([\w-]*))?\s+(.+)$/;
 
 export function parseHttpFile(text: string): HttpFile {
   const lines = text.split(/\r?\n/);
@@ -87,6 +96,7 @@ function parseBlock(
   variables: FileVariable[],
 ): HttpRequest | undefined {
   const directives: Record<string, string | true> = {};
+  const prompts: PromptVariable[] = [];
   let name: string | undefined;
   let i = start;
 
@@ -97,8 +107,17 @@ function parseBlock(
     const directive = line.match(DIRECTIVE);
     if (directive) {
       const [, key, value] = directive;
-      if (key === "name" && value) name = value.trim();
-      else directives[key!] = value?.trim() || true;
+      if (key === "name" && value) {
+        name = value.trim();
+      } else if (key === "prompt" && value) {
+        const [promptName, ...description] = value.trim().split(/\s+/);
+        prompts.push({
+          name: promptName!,
+          description: description.length ? description.join(" ") : undefined,
+        });
+      } else {
+        directives[key!] = value?.trim() || true;
+      }
       continue;
     }
     if (COMMENT.test(line)) continue;
@@ -156,7 +175,17 @@ function parseBlock(
       const bodyLines = lines.slice(i, bodyEnd + 1);
       const fileRef = bodyLines.length === 1 && bodyLines[0]!.trim().match(BODY_FILE_REF);
       if (fileRef) {
-        bodyFile = { path: fileRef[2]!.trim(), processVariables: fileRef[1] === "@" };
+        bodyFile = {
+          path: fileRef[2]!.trim(),
+          processVariables: fileRef[1] !== undefined,
+          encoding: fileRef[1] || undefined,
+        };
+      } else if (isFormUrlencoded(headers)) {
+        // REST Client lets each key=value pair sit on its own &-prefixed line.
+        body = bodyLines
+          .map((line) => line.trim())
+          .filter((line) => line !== "")
+          .reduce((joined, line) => (line.startsWith("&") ? joined + line : joined ? `${joined}\n${line}` : line), "");
       } else {
         body = bodyLines.join("\n");
       }
@@ -175,10 +204,19 @@ function parseBlock(
     body,
     bodyFile,
     directives,
+    prompts,
     startLine: requestLine,
     endLine,
     requestLine,
   };
+}
+
+function isFormUrlencoded(headers: HeaderEntry[]): boolean {
+  return headers.some(
+    (h) =>
+      h.name.toLowerCase() === "content-type" &&
+      h.value.toLowerCase().includes("application/x-www-form-urlencoded"),
+  );
 }
 
 /** Find the request whose block contains the given 0-based line. */

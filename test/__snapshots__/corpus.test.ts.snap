@@ -1,0 +1,4203 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`corpus: compatibility snapshots > known-gaps/curl-basic-auth.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 0,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "curl -u user:passwd https://httpbin.org/basic-auth/user/passwd",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > known-gaps/curl-multiline.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "  -H "Content-Type: application/json" \\
+  -H "Authorization: token xxx" \\
+  -d '{"name":"sample","time":"now"}'",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 3,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "curl -X POST https://example.com/comments \\",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > known-gaps/curl-post-data.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 0,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "curl -X POST https://example.com/comments -H "Content-Type: application/json" -d '{"name":"sample"}'",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > known-gaps/curl-simple-get.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 0,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "curl https://example.com/comments/1",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/aspnetcore-keycloak-rest.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 5,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 4,
+      "startLine": 4,
+      "url": "https://global-keycloak.azurewebsites.net/auth/realms/master/.well-known/openid-configuration",
+    },
+    {
+      "body": "grant_type=password&client_id=aspnetcore-keycloak&client_secret=1beb5df9-01dd-46c3-84a8-b65eca50ad57&resource=aspnetcore-keycloak&username=guest&password=guest&scope=openid
+@access_token = {{sign_in.response.body.$.access_token}}
+@refresh_token = {{sign_in.response.body.$.refresh_token}}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 22,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "sign_in",
+      "prompts": [],
+      "requestLine": 10,
+      "startLine": 10,
+      "url": "{{baseUrl}}/token",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 28,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{access_token}}",
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 26,
+      "startLine": 26,
+      "url": "{{baseUrl}}/userinfo",
+    },
+    {
+      "body": "grant_type=refresh_token&client_id=aspnetcore-keycloak&client_secret=1beb5df9-01dd-46c3-84a8-b65eca50ad57&resource=aspnetcore-keycloak&refresh_token={{refresh_token}}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 39,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 32,
+      "startLine": 32,
+      "url": "{{baseUrl}}/token",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 45,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{access_token}}",
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 43,
+      "startLine": 43,
+      "url": "https://localhost:5001/api/values",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 51,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{access_token}}",
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 49,
+      "startLine": 49,
+      "url": "https://localhost:5001",
+    },
+  ],
+  "variables": [
+    {
+      "line": 0,
+      "name": "baseUrl",
+      "value": "https://global-keycloak.azurewebsites.net/auth/realms/master/protocol/openid-connect",
+    },
+  ],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/axum-boilerplate-routes.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{
+    "username": "test@gmail.com",
+    "password": "00000000"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 20,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 14,
+      "startLine": 14,
+      "url": "{{baseUrl}}/login",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 25,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 24,
+      "startLine": 24,
+      "url": "{{baseUrl}}/forgotten-password/{{userEmail}}",
+    },
+    {
+      "body": "{
+    "password": "00000000"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 34,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "PATCH",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 29,
+      "startLine": 29,
+      "url": "{{baseUrl}}/update-password/{{passwordResetToken}}",
+    },
+    {
+      "body": "{
+    "username": "testgmail.com",
+    "password": "00000000",
+    "lastname": "Test",
+    "firstname": "Toto"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 47,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 38,
+      "startLine": 38,
+      "url": "{{baseUrl}}/users",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 53,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 51,
+      "startLine": 51,
+      "url": "{{baseUrl}}/users?page=4&limit=100",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 59,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 57,
+      "startLine": 57,
+      "url": "{{baseUrl}}/users/{{userId}}",
+    },
+    {
+      "body": "{
+    "username": "test@gmail.com",
+    "password": "00000000",
+    "lastname": "Test",
+    "firstname": "Toto 2"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 72,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "PUT",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 63,
+      "startLine": 63,
+      "url": "{{baseUrl}}/users/{{userId}}",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 78,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "DELETE",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 76,
+      "startLine": 76,
+      "url": "{{baseUrl}}/users/{{userIdToDelete}}",
+    },
+  ],
+  "variables": [
+    {
+      "line": 2,
+      "name": "baseUrl",
+      "value": "http://{{$dotenv SERVER_URL}}:{{$dotenv SERVER_PORT}}/api/v1",
+    },
+    {
+      "line": 3,
+      "name": "token",
+      "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmMGMyMTgzNy1hMjFkLTRhNmItYjY3OS0yOTgxYzdiZmMxZjciLCJleHAiOjE2NjQ2MjYwNDYsImlhdCI6MTY2NDUzOTY0NiwibmJmIjoxNjY0NTM5NjQ2LCJ1c2VyX2lkIjoiZjBjMjE4MzctYTIxZC00YTZiLWI2NzktMjk4MWM3YmZjMWY3IiwidXNlcl9yb2xlcyI6IkFETUlOIiwidXNlcl9saW1pdCI6MTB9.yS8Xiq6r7URR-RArp-Jt5UyuB-hkcVia1PXIaB60z3U6NHtU9YKtifdzpRTtBEOLqxd2YXShI4q4Qlh1B1OBMw",
+    },
+    {
+      "line": 8,
+      "name": "userId",
+      "value": "4323a1b1-206b-42c7-a7e5-bcb45f7f6335",
+    },
+    {
+      "line": 9,
+      "name": "userIdToDelete",
+      "value": "f6a6ed37-d0fc-4e45-b97d-3bbc6924562e",
+    },
+    {
+      "line": 10,
+      "name": "userEmail",
+      "value": "test@gmail.com",
+    },
+    {
+      "line": 11,
+      "name": "passwordResetToken",
+      "value": "9f58f9c2-7983-4027-890e-bb9b8a267587",
+    },
+  ],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/commerce-api-auth.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{
+    "nombre": "Rahma",
+    "edad": 20,
+    "ciudad": "Soria",
+    "interests": ["Restaurante"],
+    "email": "2@test.com",
+    "permiteRecibirOfertas": true,
+    "password": "HolaMundo01"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 14,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 3,
+      "startLine": 3,
+      "url": "http://localhost:3000/api/user/register",
+    },
+    {
+      "body": "{
+
+"email": "2@test.com",
+"password": "HolaMundo01" }",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 24,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 18,
+      "startLine": 18,
+      "url": "http://localhost:3000/api/user/login",
+    },
+    {
+      "body": "{
+    "nombre": "Lucas",
+    "edad": 23,
+    "ciudad": "soria",
+    "interests": ["restaurante"],
+    "email": "2@test.com",
+    "permiteRecibirOfertas":true,
+    "password": "HolaMundo01"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 41,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzlkMTM3OGU2ZWQ4N2I5YjMwNWUzN2IiLCJyb2xlIjoidXNlciIsImlhdCI6MTczODUwMjc0NiwiZXhwIjoxNzM4NTA5OTQ2fQ.tZ3f7eZYPsaX-JjBdIRkyRJJKlIp-St-uWvxC-W0mac",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "PUT",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 29,
+      "startLine": 29,
+      "url": "http://localhost:3000/api/user/update",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 46,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhkNWY3MjYxYTQwYzFmMWY1NDk2YjMiLCJyb2xlIjoidXNlciIsImlhdCI6MTczNzMxOTkzMSwiZXhwIjoxNzM3MzI3MTMxfQ.Lo1ikhF-gGInB1g-GRSJsQPF674m4muZWmJLn9oWW_U",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "DELETE",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 44,
+      "startLine": 44,
+      "url": "http://localhost:3000/api/user/delete",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/devfullcycle-auth-chain.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{
+    "email": "partner1@user.com",
+    "password": "secret"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 8,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": "loginPartner1",
+      "prompts": [],
+      "requestLine": 2,
+      "startLine": 2,
+      "url": "http://localhost:3000/auth/login",
+    },
+    {
+      "body": "{
+    "email": "partner2@user.com",
+    "password": "secret"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 21,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": "loginPartner2",
+      "prompts": [],
+      "requestLine": 15,
+      "startLine": 15,
+      "url": "http://localhost:3000/auth/login",
+    },
+    {
+      "body": "{
+    "email": "customer1@user.com",
+    "password": "secret"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 34,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": "loginCustomer1",
+      "prompts": [],
+      "requestLine": 28,
+      "startLine": 28,
+      "url": "http://localhost:3000/auth/login",
+    },
+    {
+      "body": "{
+    "name": "Partner 1",
+    "email": "partner1@user.com",
+    "password": "secret",
+    "company_name": "Company Name 1"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 48,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 40,
+      "startLine": 40,
+      "url": "http://localhost:3000/partners/register",
+    },
+    {
+      "body": "{
+    "name": "Partner 2",
+    "email": "partner2@user.com",
+    "password": "secret",
+    "company_name": "Company Name 2"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 59,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 51,
+      "startLine": 51,
+      "url": "http://localhost:3000/partners/register",
+    },
+    {
+      "body": "{
+    "name": "Customer 1",
+    "email": "customer1@user.com",
+    "password": "secret",
+    "address": "address test",
+    "phone": "333333333"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 71,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 62,
+      "startLine": 62,
+      "url": "http://localhost:3000/customers/register",
+    },
+    {
+      "body": "{
+    "name": "Evento test 1",
+    "description": "descrição do evento",
+    "date": "2025-01-01T00:00:00",
+    "location": "Rua x, bairro etc"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 83,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ tokenPartner1 }}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 74,
+      "startLine": 74,
+      "url": "http://localhost:3000/partners/events",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 87,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ tokenPartner1 }}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 86,
+      "startLine": 86,
+      "url": "http://localhost:3000/partners/events",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 91,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ tokenPartner1 }}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 90,
+      "startLine": 90,
+      "url": "http://localhost:3000/partners/events/1",
+    },
+    {
+      "body": "{
+    "num_tickets": 10,
+    "price": 100
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 101,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ tokenPartner1 }}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 94,
+      "startLine": 94,
+      "url": "http://localhost:3000/events/1/tickets",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 104,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 104,
+      "startLine": 104,
+      "url": "http://localhost:3000/events/1/tickets",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 107,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 107,
+      "startLine": 107,
+      "url": "http://localhost:3000/events/1/tickets/1",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 110,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 110,
+      "startLine": 110,
+      "url": "http://localhost:3000/events",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 113,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 113,
+      "startLine": 113,
+      "url": "http://localhost:3000/events/1",
+    },
+    {
+      "body": "{
+    "ticket_ids": [1],
+    "card_token": "tok_visa"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 123,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ tokenCustomer1 }}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 116,
+      "startLine": 116,
+      "url": "http://localhost:3000/purchases",
+    },
+  ],
+  "variables": [
+    {
+      "line": 11,
+      "name": "tokenPartner1",
+      "value": "{{ loginPartner1.response.body.token }}",
+    },
+    {
+      "line": 24,
+      "name": "tokenPartner2",
+      "value": "{{ loginPartner2.response.body.token }}",
+    },
+    {
+      "line": 37,
+      "name": "tokenCustomer1",
+      "value": "{{ loginCustomer1.response.body.token }}",
+    },
+  ],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/ecommerce-api.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 3,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 3,
+      "startLine": 3,
+      "url": "http://localhost:8000/products/1",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 6,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 6,
+      "startLine": 6,
+      "url": "http://localhost:8000/products/2/",
+    },
+    {
+      "body": "{
+    "name": "Example Product",
+    "description": "A sample product description.",
+    "price": 19.99,
+    "stock": 50
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 17,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "PUT",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 9,
+      "startLine": 9,
+      "url": "http://localhost:8000/products/1/",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 20,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "DELETE",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 20,
+      "startLine": 20,
+      "url": "http://localhost:8000/products/13/",
+    },
+    {
+      "body": "{
+  "name": "Example Product",
+  "description": "A sample product description.",
+  "price": 19.99,
+  "stock": 50
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 32,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{acessToken}}",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 23,
+      "startLine": 23,
+      "url": "http://localhost:8000/products/",
+    },
+    {
+      "body": "{
+    "username": "Lukman",
+    "password": "a00028365"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 41,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 35,
+      "startLine": 35,
+      "url": "http://localhost:8000/api/token/",
+    },
+    {
+      "body": "{
+  "refresh": "{{refreshToken}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 49,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 44,
+      "startLine": 44,
+      "url": "http://localhost:8000/api/token/refresh/",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 54,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{refreshToken}}",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 52,
+      "startLine": 52,
+      "url": "http://localhost:8000/user-orders/",
+    },
+  ],
+  "variables": [
+    {
+      "line": 0,
+      "name": "acessToken",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzgyMTE0OTY2LCJpYXQiOjE3ODIxMTQ2NjYsImp0aSI6ImU2ZTI5ZjE2OTIwODQyMzI4MDM4MjczNjI0MzY1MTc1IiwidXNlcl9pZCI6IjIifQ.ni_FtQ83Iv4LZwV_Nt31r-SUmtBqBBKkprnPmQaIWac",
+    },
+    {
+      "line": 1,
+      "name": "refreshToken",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc4MjIwNDM1NCwiaWF0IjoxNzgyMTE3OTU0LCJqdGkiOiJmNmJmYmMzNjA5M2I0MWQ3ODYxOTkyMGRlYjYyNTZjYyIsInVzZXJfaWQiOiIyIn0.1yQ4z8YjZpO_xDiNFIWfkwLFturxkbkzGgaDLNR8Vno",
+    },
+  ],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/emmett-starter.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 7,
+      "headers": [
+        {
+          "name": "content-type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "checkin",
+      "prompts": [],
+      "requestLine": 6,
+      "startLine": 6,
+      "url": "http://localhost:3000/guests/{{guestId}}/stays/{{roomId}}",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 17,
+      "headers": [
+        {
+          "name": "content-type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 16,
+      "startLine": 16,
+      "url": "http://localhost:3000{{location}}",
+    },
+    {
+      "body": "{
+  "amount": {{amount}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 28,
+      "headers": [
+        {
+          "name": "content-type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 23,
+      "startLine": 23,
+      "url": "http://localhost:3000{{location}}/charges",
+    },
+    {
+      "body": "{
+  "amount": {{amount}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 39,
+      "headers": [
+        {
+          "name": "content-type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 34,
+      "startLine": 34,
+      "url": "http://localhost:3000{{location}}/payments",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 44,
+      "headers": [
+        {
+          "name": "content-type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "DELETE",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 43,
+      "startLine": 43,
+      "url": "http://localhost:3000{{location}}",
+    },
+  ],
+  "variables": [
+    {
+      "line": 0,
+      "name": "guestId",
+      "value": "dummy",
+    },
+    {
+      "line": 1,
+      "name": "roomId",
+      "value": "dummy",
+    },
+    {
+      "line": 12,
+      "name": "location",
+      "value": "{{checkin.response.headers.Location}}",
+    },
+    {
+      "line": 21,
+      "name": "amount",
+      "value": "10",
+    },
+    {
+      "line": 32,
+      "name": "amount",
+      "value": "10",
+    },
+  ],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/fast-feet-client.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{
+  "name": "Robson",
+  "cpf": "568.362.143-70",
+  "email": "robson@example.com",
+  "password": "123456"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 11,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": "create_account",
+      "prompts": [],
+      "requestLine": 3,
+      "startLine": 3,
+      "url": "{{baseUrl}}/accounts",
+    },
+  ],
+  "variables": [
+    {
+      "line": 0,
+      "name": "baseUrl",
+      "value": "http://localhost:3333",
+    },
+  ],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/glosa-server-cli.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "# Get token
+GET http://localhost:4000/api/v1/captcha/?url=https://glosa.example/best-SO/
+
+# Get token
+GET http://localhost:4000/api/v1/captcha/?url=
+
+# Get token
+GET http://localhost:4000/api/v1/captcha/
+
+# Get token
+GET http://localhost:4000/api/v1/captcha/?other=
+
+# Add comment
+POST http://localhost:4000/api/v1/comments/
+Content-Type: application/json
+
+{
+        "parent": "",
+        "token": "ZOTJRWSPRZFQUHPHXZAV",
+        "author": "El Cid",
+        "email": "campeador@my.email",
+        "message": "I like it very much.",
+        "thread": "https://glosa.example/best-SO/"
+}
+
+# Latest
+POST http://localhost:4000/api/v1/comments/latest/1
+Content-Type: application/json
+Authorization: Bearer mysecret
+
+# All threads
+GET http://localhost:4000/api/v1/threads/search/pyTHon
+Content-Type: application/json
+Authorization: Bearer mysecret
+
+# Update comment
+PUT http://localhost:4000/api/v1/comments/
+Content-Type: application/json
+Authorization: Bearer mysecret
+
+{
+  "id": 4889630303,
+  "author": "Julio",
+  "email": "my@ide.com",
+  "message": "hi my friend"
+}
+
+# Delete comment
+DELETE http://localhost:4000/api/v1/comments/
+Content-Type: application/json
+Authorization: Bearer mysecret
+
+{"id": 4889630296}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 55,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 1,
+      "startLine": 1,
+      "url": "http://localhost:4000/api/v1/comments/?url=https://programadorwebvalencia.com/javascript-ejemplo-carrito-de-compra/",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/httpx-index.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 4,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": "myip",
+      "prompts": [],
+      "requestLine": 4,
+      "startLine": 4,
+      "url": "https://httpbin.org/ip",
+    },
+    {
+      "body": "[
+  1
+]",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 13,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": "post",
+      "prompts": [],
+      "requestLine": 8,
+      "startLine": 8,
+      "url": "https://httpbin.org/post",
+    },
+    {
+      "body": "  request.variables.set("name","linux_china");
+  request.variables.set("age","22");
+%}
+GET https://httpbin.org/get?id=1&name={{name}}&age={{age}}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 21,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": "script-demo",
+      "prompts": [],
+      "requestLine": 17,
+      "startLine": 17,
+      "url": "< {%",
+    },
+    {
+      "body": "  id=123&
+  value=content",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 27,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": "get",
+      "prompts": [],
+      "requestLine": 25,
+      "startLine": 25,
+      "url": "https://httpbin.org/get?",
+    },
+    {
+      "body": "1",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 35,
+      "headers": [
+        {
+          "name": "Host",
+          "value": "127.0.0.1:42252",
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": "request",
+      "prompts": [],
+      "requestLine": 31,
+      "startLine": 31,
+      "url": "RSOCKET com.example.UserService.findById",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 41,
+      "headers": [
+        {
+          "name": "Host",
+          "value": "127.0.0.1:42252",
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": "stream",
+      "prompts": [],
+      "requestLine": 39,
+      "startLine": 39,
+      "url": "STREAM com.example.UserService.findAll",
+    },
+    {
+      "body": "{
+  "query": "query { post(id: 1) { id title } }"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 50,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": "query_by_json",
+      "prompts": [],
+      "requestLine": 45,
+      "startLine": 45,
+      "url": "https://graphqlzero.almansi.me/api",
+    },
+    {
+      "body": "query findPostById {
+  post(id: 1) {
+    id
+    title
+    body
+  }
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 62,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": "query",
+      "prompts": [],
+      "requestLine": 54,
+      "startLine": 54,
+      "url": "GRAPHQL https://graphqlzero.almansi.me/api",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/microservices-cart.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{
+  "email": "im@one.com",
+  "password": "passdowr"
+}
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.global.set("auth_token", response.body.token);
+%}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 13,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "http://localhost:8001/api/login",
+    },
+    {
+      "body": "> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+    client.global.set("cart_url", response.headers.valueOf("Location"));
+%}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 25,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{auth_token}}",
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 16,
+      "startLine": 16,
+      "url": "http://localhost:8003/api/cart",
+    },
+    {
+      "body": "{
+  "id": 6,
+  "qty": 5
+}
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 41,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{auth_token}}",
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 28,
+      "startLine": 28,
+      "url": "http://localhost:8003/{{cart_url}}",
+    },
+    {
+      "body": "> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 52,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{auth_token}}",
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 44,
+      "startLine": 44,
+      "url": "http://localhost:8003/{{cart_url}}",
+    },
+    {
+      "body": "{
+  "id": 1,
+  "qty": 1
+}
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 68,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{auth_token}}",
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "PUT",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 55,
+      "startLine": 55,
+      "url": "http://localhost:8003/{{cart_url}}",
+    },
+    {
+      "body": "> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 79,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{auth_token}}",
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "DELETE",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 71,
+      "startLine": 71,
+      "url": "http://localhost:8003/{{cart_url}}/1",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/nest-task-management-dev.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{
+  "username": "shrek",
+  "password": "Hey-now-you're-an-4ll-star"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 7,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 1,
+      "startLine": 1,
+      "url": "http://localhost:3001/auth/register",
+    },
+    {
+      "body": "{
+  "username": "hodor",
+  "password": "H0ld-Th3'D00r"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 16,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 10,
+      "startLine": 10,
+      "url": "http://localhost:3001/auth/register",
+    },
+    {
+      "body": "{
+  "username": "shrek",
+  "password": "Hey-now-you're-an-4ll-star"
+}
+> {% client.global.set("auth_token", response.body.accessToken); %}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 26,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 19,
+      "startLine": 19,
+      "url": "http://localhost:3001/auth/signin",
+    },
+    {
+      "body": "{
+  "title": "jane",
+  "description": "let's go be bad guys"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 36,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ auth_token }}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 29,
+      "startLine": 29,
+      "url": "http://localhost:3001/api/tasks",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 41,
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ auth_token }}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 39,
+      "startLine": 39,
+      "url": "http://localhost:3001/api/tasks",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 46,
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ auth_token }}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 44,
+      "startLine": 44,
+      "url": "http://localhost:3001/api/tasks/27c2ccfd-734e-4dce-bc57-7f7d05227074",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 50,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ auth_token }}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "DELETE",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 49,
+      "startLine": 49,
+      "url": "http://localhost:3001/api/tasks/d63839fb-889a-45af-9ba4-82ba23ab8a80",
+    },
+    {
+      "body": "{
+  "id": "cbb4bf30-fe5c-4e1c-a100-6159a4b11831",
+  "title": "task 3, bubba",
+  "status": "IN_PROGRESS"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 60,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "PUT",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 53,
+      "startLine": 53,
+      "url": "http://localhost:3001/api/tasks/cbb4bf30-fe5c-4e1c-a100-6159a4b11831",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/openai-completions.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{
+  "model": "text-davinci-001",
+  "prompt": "What is the command to list all files in a directory on macOS?",
+  "temperature": 1,
+  "max_tokens": 100
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 9,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer YOUR_API_KEY_HERE",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://api.openai.com/v1/completions",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > real-world/spanet-api.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 4,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": "getStatus",
+      "prompts": [],
+      "requestLine": 4,
+      "startLine": 4,
+      "url": "{{baseURL}}/spa/status",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 10,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": "getLightModes",
+      "prompts": [],
+      "requestLine": 10,
+      "startLine": 10,
+      "url": "{{baseURL}}/spa/lights/modes",
+    },
+    {
+      "body": "{
+ "Mode":        "{{mode}}",
+ "Brightness":  {{brightness}},
+ "EffectSpeed": {{effectSpeed}},
+ "Colour":      {{colour}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 28,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setLights",
+      "prompts": [
+        {
+          "description": "Light Mode (see output from (see output from getLightModes)",
+          "name": "mode",
+        },
+        {
+          "description": "How bright (1-5)",
+          "name": "brightness",
+        },
+        {
+          "description": "How fast (1-5)",
+          "name": "effectSpeed",
+        },
+        {
+          "description": "What colour (0-30)",
+          "name": "colour",
+        },
+      ],
+      "requestLine": 20,
+      "startLine": 20,
+      "url": "{{baseURL}}/spa/lights",
+    },
+    {
+      "body": "{"Mode": "{{mode}}"}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 38,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setLightsMode",
+      "prompts": [
+        {
+          "description": "Light Mode (see output from getLightModes)",
+          "name": "mode",
+        },
+      ],
+      "requestLine": 35,
+      "startLine": 35,
+      "url": "{{baseURL}}/spa/lights/mode",
+    },
+    {
+      "body": "{"Brightness": {{brightness}}}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 48,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setLightsBrightness",
+      "prompts": [
+        {
+          "description": "How bright (1-5)",
+          "name": "brightness",
+        },
+      ],
+      "requestLine": 45,
+      "startLine": 45,
+      "url": "{{baseURL}}/spa/lights/brightness",
+    },
+    {
+      "body": "{"EffectSpeed": {{effectSpeed}}}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 58,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setLightsEffectSpeed",
+      "prompts": [
+        {
+          "description": "How fast (1-5)",
+          "name": "effectSpeed",
+        },
+      ],
+      "requestLine": 55,
+      "startLine": 55,
+      "url": "{{baseURL}}/spa/lights/effectspeed",
+    },
+    {
+      "body": "{"Colour": {{colour}}}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 68,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setLightsColour",
+      "prompts": [
+        {
+          "description": "What colour (0-30)",
+          "name": "colour",
+        },
+      ],
+      "requestLine": 65,
+      "startLine": 65,
+      "url": "{{baseURL}}/spa/lights/colour",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 74,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setLightsOff",
+      "prompts": [],
+      "requestLine": 74,
+      "startLine": 74,
+      "url": "{{baseURL}}/spalights/off",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 80,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "toggleLights",
+      "prompts": [],
+      "requestLine": 80,
+      "startLine": 80,
+      "url": "{{baseURL}}/spa/lights/toggle",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 86,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": "getPumpStates",
+      "prompts": [],
+      "requestLine": 86,
+      "startLine": 86,
+      "url": "{{baseURL}}/spa/pump/states",
+    },
+    {
+      "body": "{"State": "{{pumpState}}"}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 97,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setPumpMode",
+      "prompts": [
+        {
+          "description": "Pump number (1-5)",
+          "name": "pumpNumber",
+        },
+        {
+          "description": "State (see output from getPumpStates)",
+          "name": "pumpState",
+        },
+      ],
+      "requestLine": 94,
+      "startLine": 94,
+      "url": "{{baseURL}}/spa/pump/{{pumpNumber}}",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 103,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": "getBlowerModes",
+      "prompts": [],
+      "requestLine": 103,
+      "startLine": 103,
+      "url": "{{baseURL}}/spa/blower/modes",
+    },
+    {
+      "body": "{
+ "Mode": "{{blowerMode}}",
+ "Speed": {{blowerSpeed}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 117,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setBlower",
+      "prompts": [
+        {
+          "description": "Blower mode (see output from getBlowerModes)",
+          "name": "blowerMode",
+        },
+        {
+          "description": "Speed (1-5, 0 to omit)",
+          "name": "blowerSpeed",
+        },
+      ],
+      "requestLine": 111,
+      "startLine": 111,
+      "url": "{{baseURL}}/spa/blower",
+    },
+    {
+      "body": "{
+ "Speed": {{blowerSpeed}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 129,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setBlowerSpeed",
+      "prompts": [
+        {
+          "description": "Speed (1-5, 0 to omit)",
+          "name": "blowerSpeed",
+        },
+      ],
+      "requestLine": 124,
+      "startLine": 124,
+      "url": "{{baseURL}}/spa/blower/speed",
+    },
+    {
+      "body": "{
+ "Temperature": {{temperature}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 141,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setTemperature",
+      "prompts": [
+        {
+          "description": "Temperature of the spa (5.0-41.0)",
+          "name": "temperature",
+        },
+      ],
+      "requestLine": 136,
+      "startLine": 136,
+      "url": "{{baseURL}}/spa/temperature",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 147,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": "getOperationModes",
+      "prompts": [],
+      "requestLine": 147,
+      "startLine": 147,
+      "url": "{{baseURL}}/spa/operation/modes",
+    },
+    {
+      "body": "{
+ "Mode": "{{operationMode}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 159,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setOperationMode",
+      "prompts": [
+        {
+          "description": "Opreation mode (see output from getLightModes)",
+          "name": "operationMode",
+        },
+      ],
+      "requestLine": 154,
+      "startLine": 154,
+      "url": "{{baseURL}}/spa/operation/mode",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 165,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "toggleSanitise",
+      "prompts": [],
+      "requestLine": 165,
+      "startLine": 165,
+      "url": "{{baseURL}}/spa/sanitise",
+    },
+    {
+      "body": "{
+ "Time": "{{autoSanitiseTime}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 177,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setAutoSanitiseTime",
+      "prompts": [
+        {
+          "description": "Time to sanitise (hh:mm)",
+          "name": "autoSanitiseTime",
+        },
+      ],
+      "requestLine": 172,
+      "startLine": 172,
+      "url": "{{baseURL}}/spa/sanitise/time",
+    },
+    {
+      "body": "{
+ "Hours": {{filtrationHours}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 189,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setFiltrationRuntime",
+      "prompts": [
+        {
+          "description": "Number of hours (1-24)",
+          "name": "filtrationHours",
+        },
+      ],
+      "requestLine": 184,
+      "startLine": 184,
+      "url": "{{baseURL}}/spa/filtration/runtime",
+    },
+    {
+      "body": "{
+ "Hours": {{filtrationCycle}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 201,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setFiltrationCycle",
+      "prompts": [
+        {
+          "description": "How many hours between each cycle (1, 2, 3, 4, 6, 8, 12, 24)",
+          "name": "filtrationCycle",
+        },
+      ],
+      "requestLine": 196,
+      "startLine": 196,
+      "url": "{{baseURL}}/spa/filtration/cycle",
+    },
+    {
+      "body": "{
+ "Minutes": {{minutes}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 213,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setTimeout",
+      "prompts": [
+        {
+          "description": "How many minutes to run before sleeping (10-60)",
+          "name": "minutes",
+        },
+      ],
+      "requestLine": 208,
+      "startLine": 208,
+      "url": "{{baseURL}}/spa/timeout",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 219,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": "getHeatpumpModes",
+      "prompts": [],
+      "requestLine": 219,
+      "startLine": 219,
+      "url": "{{baseURL}}/spa/heatpump/modes",
+    },
+    {
+      "body": "{
+ "Mode": "{{heatpumpMode}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 231,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setHeatpumpMode",
+      "prompts": [
+        {
+          "description": "Heatpump mode (see output from getHeatpumpModes)",
+          "name": "heatpumpMode",
+        },
+      ],
+      "requestLine": 226,
+      "startLine": 226,
+      "url": "{{baseURL}}/spa/heatpump/mode",
+    },
+    {
+      "body": "{
+ "Boost": {{elementBoost}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 243,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setSVElementBoost",
+      "prompts": [
+        {
+          "description": "true or false",
+          "name": "elementBoost",
+        },
+      ],
+      "requestLine": 238,
+      "startLine": 238,
+      "url": "{{baseURL}}/spa/svelementboost",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 249,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": "getLockModes",
+      "prompts": [],
+      "requestLine": 249,
+      "startLine": 249,
+      "url": "{{baseURL}}/spa/lock/modes",
+    },
+    {
+      "body": "{
+ "Mode": "{{lockMode}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 261,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setLockMode",
+      "prompts": [
+        {
+          "description": "Lock mode (see output from getLockModes)",
+          "name": "lockMode",
+        },
+      ],
+      "requestLine": 256,
+      "startLine": 256,
+      "url": "{{baseURL}}/spa/lock/mode",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 267,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": "getPowersaveModes",
+      "prompts": [],
+      "requestLine": 267,
+      "startLine": 267,
+      "url": "{{baseURL}}/spa/powersave/modes",
+    },
+    {
+      "body": "{
+ "Mode": "{{powersaveMode}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 279,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setPowersaveMode",
+      "prompts": [
+        {
+          "description": "Powersave mode (see output from getPowersaveModes)",
+          "name": "powersaveMode",
+        },
+      ],
+      "requestLine": 274,
+      "startLine": 274,
+      "url": "{{baseURL}}/spa/powersave/mode",
+    },
+    {
+      "body": "{
+ "Time": "{{peakStart}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 291,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setPeakStart",
+      "prompts": [
+        {
+          "description": "Time that peak power starts (hh:mm)",
+          "name": "peakStart",
+        },
+      ],
+      "requestLine": 286,
+      "startLine": 286,
+      "url": "{{baseURL}}/spa/peak/start",
+    },
+    {
+      "body": "{
+ "Time": "{{peakEnd}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 303,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setPeakEnd",
+      "prompts": [
+        {
+          "description": "Time to peak power ends (hh:mm)",
+          "name": "peakEnd",
+        },
+      ],
+      "requestLine": 298,
+      "startLine": 298,
+      "url": "{{baseURL}}/spa/peak/end",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 309,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": "getSleeptimerStates",
+      "prompts": [],
+      "requestLine": 309,
+      "startLine": 309,
+      "url": "{{baseURL}}/spa/sleeptimer/states",
+    },
+    {
+      "body": "{
+  "State": "{{timerState}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 322,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setSleepTimerState",
+      "prompts": [
+        {
+          "description": "Which timer (1-2)",
+          "name": "timerNumber",
+        },
+        {
+          "description": "Sleep timer state (see output from getSleeptimerStates)",
+          "name": "timerState",
+        },
+      ],
+      "requestLine": 317,
+      "startLine": 317,
+      "url": "{{baseURL}}/spa/sleeptimer/{{timerNumber}}/state",
+    },
+    {
+      "body": "{
+  "Time": "{{timerStart}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 335,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setSleepTimerStart",
+      "prompts": [
+        {
+          "description": "Which timer (1-2)",
+          "name": "timerNumber",
+        },
+        {
+          "description": "Time the sleep period starts (hh:mm)",
+          "name": "timerStart",
+        },
+      ],
+      "requestLine": 330,
+      "startLine": 330,
+      "url": "{{baseURL}}/spa/sleeptimer/{{timerNumber}}/start",
+    },
+    {
+      "body": "{
+  "Time": "{{timerEnd}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 348,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setSleepTimerEnd",
+      "prompts": [
+        {
+          "description": "Which timer (1-2)",
+          "name": "timerNumber",
+        },
+        {
+          "description": "Time the sleep period ends (hh:mm)",
+          "name": "timerEnd",
+        },
+      ],
+      "requestLine": 343,
+      "startLine": 343,
+      "url": "{{baseURL}}/spa/sleeptimer/{{timerNumber}}/end",
+    },
+    {
+      "body": "{
+  "State": "{{timerState}}",
+  "Start": "{{timerStart}}",
+  "End": "{{timerEnd}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 365,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setSleepTimer",
+      "prompts": [
+        {
+          "description": "Which timer (1-2)",
+          "name": "timerNumber",
+        },
+        {
+          "description": "Sleep timer state (see output from getSleeptimerStates)",
+          "name": "timerState",
+        },
+        {
+          "description": "Time the sleep period starts (hh:mm)",
+          "name": "timerStart",
+        },
+        {
+          "description": "Time the sleep period ends (hh:mm)",
+          "name": "timerEnd",
+        },
+      ],
+      "requestLine": 358,
+      "startLine": 358,
+      "url": "{{baseURL}}/spa/sleeptimer/{{timerNumber}}",
+    },
+    {
+      "body": "{
+  "Year": {{year}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 377,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setDateTimeYear",
+      "prompts": [
+        {
+          "description": "Year (2024)",
+          "name": "year",
+        },
+      ],
+      "requestLine": 372,
+      "startLine": 372,
+      "url": "{{baseURL}}/spa/datetime/year",
+    },
+    {
+      "body": "{
+  "Month": {{month}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 389,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setDateTimeMonth",
+      "prompts": [
+        {
+          "description": "Month (1-12)",
+          "name": "month",
+        },
+      ],
+      "requestLine": 384,
+      "startLine": 384,
+      "url": "{{baseURL}}/spa/datetime/month",
+    },
+    {
+      "body": "{
+  "Day": {{day}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 401,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setDateTimeDay",
+      "prompts": [
+        {
+          "description": "Day (1-31)",
+          "name": "day",
+        },
+      ],
+      "requestLine": 396,
+      "startLine": 396,
+      "url": "{{baseURL}}/spa/datetime/day",
+    },
+    {
+      "body": "{
+  "Hour": {{hour}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 413,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setDateTimeHour",
+      "prompts": [
+        {
+          "description": "Hour (0-23)",
+          "name": "hour",
+        },
+      ],
+      "requestLine": 408,
+      "startLine": 408,
+      "url": "{{baseURL}}/spa/datetime/hour",
+    },
+    {
+      "body": "{
+  "Minute": {{minute}}
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 425,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setDateTimeMinute",
+      "prompts": [
+        {
+          "description": "Minute (0:59)",
+          "name": "minute",
+        },
+      ],
+      "requestLine": 420,
+      "startLine": 420,
+      "url": "{{baseURL}}/spa/datetime/minute",
+    },
+    {
+      "body": "{
+  "DateTime": "{{datetime}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 437,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "setDateTime",
+      "prompts": [
+        {
+          "description": "Date and Time (2006-01-02 15:04)",
+          "name": "datetime",
+        },
+      ],
+      "requestLine": 432,
+      "startLine": 432,
+      "url": "{{baseURL}}/spa/datetime",
+    },
+  ],
+  "variables": [
+    {
+      "line": 0,
+      "name": "baseURL",
+      "value": "http://127.0.0.1:8080",
+    },
+  ],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/aws-cognito.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 1,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "COGNITO <Username> <Password> <Region> <UserPoolId> <ClientId>",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://httpbin.org/aws-auth",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/aws-signature-v4.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 1,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "AWS <accessId> <accessKey> [token:<sessionToken>] [region:<regionName>] [service:<serviceName>]",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://httpbin.org/aws-auth",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/azure-aad-token.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 1,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{$aadToken new public mydomain.onmicrosoft.com aud:https://management.azure.com}}",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://management.azure.com/subscriptions?api-version=2019-06-01",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/azure-aad-v2-token.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 1,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{$aadV2Token new AzureCloud scopes:User.Read tenantid:mydomain.onmicrosoft.com clientid:00000000-0000-0000-0000-000000000000}}",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://graph.microsoft.com/v1.0/me",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/bare-url.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 0,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments/1",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/basic-auth-base64.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 1,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Basic dXNlcjpwYXNzd2Q=",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://httpbin.org/basic-auth/user/passwd",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/basic-auth-raw.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 1,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Basic user:passwd",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://httpbin.org/basic-auth/user/passwd",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/basic-auth-space.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 1,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Basic user passwd",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://httpbin.org/basic-auth/user/passwd",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/body-file-reference-absolute.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": {
+        "encoding": undefined,
+        "path": "C:\\Users\\Default\\Desktop\\demo.xml",
+        "processVariables": false,
+      },
+      "directives": {},
+      "endLine": 4,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/xml",
+        },
+        {
+          "name": "Authorization",
+          "value": "token xxx",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/body-file-reference-encoding.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": {
+        "encoding": "latin1",
+        "path": "./demo.xml",
+        "processVariables": true,
+      },
+      "directives": {},
+      "endLine": 4,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/xml",
+        },
+        {
+          "name": "Authorization",
+          "value": "token xxx",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/body-file-reference-processed.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": {
+        "encoding": undefined,
+        "path": "./demo.xml",
+        "processVariables": true,
+      },
+      "directives": {},
+      "endLine": 4,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/xml",
+        },
+        {
+          "name": "Authorization",
+          "value": "token xxx",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/body-file-reference-relative.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": {
+        "encoding": undefined,
+        "path": "./demo.xml",
+        "processVariables": false,
+      },
+      "directives": {},
+      "endLine": 4,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/xml",
+        },
+        {
+          "name": "Authorization",
+          "value": "token xxx",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/digest-auth.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 1,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Digest user passwd",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://httpbin.org/digest-auth/auth/user/passwd",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/dotenv-variable.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 2,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{$dotenv API_TOKEN}}",
+        },
+        {
+          "name": "X-Indirect",
+          "value": "{{$dotenv %tokenKey}}",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://api.example.com/values",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/environment-variables.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 1,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{token}}",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://{{host}}/api/{{version}}comments/1",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/file-variables.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 11,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 11,
+      "startLine": 11,
+      "url": "https://{{host}}/authors/{{%name}}",
+    },
+    {
+      "body": "{
+    "content": "foo bar",
+    "created_at": "{{createdAt}}",
+    "modified_by": "{{modifiedBy}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 22,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "{{contentType}}",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "PATCH",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 15,
+      "startLine": 15,
+      "url": "https://{{host}}/authors/{{%name}}",
+    },
+  ],
+  "variables": [
+    {
+      "line": 0,
+      "name": "hostname",
+      "value": "api.example.com",
+    },
+    {
+      "line": 1,
+      "name": "port",
+      "value": "8080",
+    },
+    {
+      "line": 2,
+      "name": "host",
+      "value": "{{hostname}}:{{port}}",
+    },
+    {
+      "line": 3,
+      "name": "contentType",
+      "value": "application/json",
+    },
+    {
+      "line": 4,
+      "name": "createdAt",
+      "value": "{{$datetime iso8601}}",
+    },
+    {
+      "line": 5,
+      "name": "modifiedBy",
+      "value": "{{$processEnv USERNAME}}",
+    },
+    {
+      "line": 9,
+      "name": "name",
+      "value": "Strunk & White",
+    },
+  ],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/form-urlencoded-multiline.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "name=foo&password=bar",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 4,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://api.example.com/login",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/graphql-request.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "query ($name: String!, $owner: String!) {
+  repository(name: $name, owner: $owner) {
+    name
+    fullName: nameWithOwner
+    description
+    diskUsage
+    forkCount
+    stargazers(first: 5) {
+        totalCount
+        nodes {
+            login
+            name
+        }
+    }
+    watchers {
+        totalCount
+    }
+  }
+}
+
+{
+    "name": "vscode-restclient",
+    "owner": "Huachao"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 28,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer xxx",
+        },
+        {
+          "name": "X-REQUEST-TYPE",
+          "value": "GraphQL",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://api.github.com/graphql",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/multipart-form.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text"
+
+title
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="1.png"
+Content-Type: image/png
+
+< ./1.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 12,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://api.example.com/user/upload",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/multiple-requests-separator.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 0,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments/1",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 4,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 4,
+      "startLine": 4,
+      "url": "https://example.com/topics/1",
+    },
+    {
+      "body": "{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 14,
+      "headers": [
+        {
+          "name": "content-type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 8,
+      "startLine": 8,
+      "url": "https://example.com/comments",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/no-cookie-jar-directive.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {
+        "no-cookie-jar": true,
+      },
+      "endLine": 2,
+      "headers": [
+        {
+          "name": "Cookie",
+          "value": "sessionId=abc123",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 1,
+      "startLine": 1,
+      "url": "https://example.com/no-cookies",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/no-redirect-directive.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {
+        "no-redirect": true,
+      },
+      "endLine": 1,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 1,
+      "startLine": 1,
+      "url": "https://example.com/redirecting-endpoint",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/oidc-access-token.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 1,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{$oidcAccessToken new clientId:my-client callbackPort:7777 authorizeEndpoint:https://idp.example.com/authorize tokenEndpoint:https://idp.example.com/token scopes:openid,profile audience:https://api.example.com}}",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://api.example.com/protected",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/per-request-settings.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{
+    "danger": true
+}",
+      "bodyFile": undefined,
+      "directives": {
+        "no-cookie-jar": true,
+        "no-redirect": true,
+        "note": true,
+      },
+      "endLine": 8,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 3,
+      "startLine": 3,
+      "url": "https://example.com/critical",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/post-json-body.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 6,
+      "headers": [
+        {
+          "name": "content-type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/process-env.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 2,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{$processEnv PRODSECRET}}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 1,
+      "startLine": 1,
+      "url": "https://{{host}}/{{version}}/values/item1?user={{$processEnv USERNAME}}",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/process-env-indirect.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 2,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{$processEnv %secretKey}}",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 1,
+      "startLine": 1,
+      "url": "https://{{host}}/{{version}}/values/item1?user={{$processEnv USERNAME}}",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/prompt-variables.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{
+    "username": "{{username}}",
+    "otp": "{{otp}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 15,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "{{contentType}}",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [
+        {
+          "description": undefined,
+          "name": "username",
+        },
+        {
+          "description": "Your reference code display on webpage",
+          "name": "refCode",
+        },
+        {
+          "description": "Your one-time password in your mailbox",
+          "name": "otp",
+        },
+      ],
+      "requestLine": 9,
+      "startLine": 9,
+      "url": "https://{{host}}/verify-otp/{{refCode}}",
+    },
+  ],
+  "variables": [
+    {
+      "line": 0,
+      "name": "hostname",
+      "value": "api.example.com",
+    },
+    {
+      "line": 1,
+      "name": "port",
+      "value": "8080",
+    },
+    {
+      "line": 2,
+      "name": "host",
+      "value": "{{hostname}}:{{port}}",
+    },
+    {
+      "line": 3,
+      "name": "contentType",
+      "value": "application/json",
+    },
+  ],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/query-continuation.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 2,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments?page=2&pageSize=10",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/query-string-inline.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 0,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments?page=2&pageSize=10",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/request-headers.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 3,
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "rest-client",
+        },
+        {
+          "name": "Accept-Language",
+          "value": "en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4",
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments/1",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/request-line-no-version.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 0,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments/1",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/request-line-with-version.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 0,
+      "headers": [],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments/1",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/request-variables-chaining.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "name=foo&password=bar",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 6,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "login",
+      "prompts": [],
+      "requestLine": 3,
+      "startLine": 3,
+      "url": "{{baseUrl}}/api/login",
+    },
+    {
+      "body": "{
+    "content": "fake content"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 19,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{authToken}}",
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": "createComment",
+      "prompts": [],
+      "requestLine": 13,
+      "startLine": 13,
+      "url": "{{baseUrl}}/comments",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 27,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{authToken}}",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": "getCreatedComment",
+      "prompts": [],
+      "requestLine": 26,
+      "startLine": 26,
+      "url": "{{baseUrl}}/comments/{{commentId}}",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 33,
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/xml",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": "getReplies",
+      "prompts": [],
+      "requestLine": 32,
+      "startLine": 32,
+      "url": "{{baseUrl}}/comments/{{commentId}}/replies",
+    },
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 38,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": "getFirstReply",
+      "prompts": [],
+      "requestLine": 38,
+      "startLine": 38,
+      "url": "{{baseUrl}}/comments/{{commentId}}/replies/{{getReplies.response.body.//reply[1]/@id}}",
+    },
+  ],
+  "variables": [
+    {
+      "line": 0,
+      "name": "baseUrl",
+      "value": "https://example.com/api",
+    },
+    {
+      "line": 10,
+      "name": "authToken",
+      "value": "{{login.response.headers.X-AuthToken}}",
+    },
+    {
+      "line": 23,
+      "name": "commentId",
+      "value": "{{createComment.response.body.$.id}}",
+    },
+  ],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/shared-environment-reference.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 1,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "{{$shared prodToken}}",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://{{host}}/api/{{version}}/comments/1",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/system-variables.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{
+    "user_name": "{{$dotenv USERNAME}}",
+    "request_id": "{{$guid}}",
+    "updated_at": "{{$timestamp}}",
+    "created_at": "{{$timestamp -1 d}}",
+    "review_count": "{{$randomInt 5 200}}",
+    "custom_date": "{{$datetime 'YYYY-MM-DD'}}",
+    "local_custom_date": "{{$localDatetime 'YYYY-MM-DD'}}"
+}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 12,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/xml",
+        },
+        {
+          "name": "Date",
+          "value": "{{$datetime rfc1123}}",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://api.example.com/comments",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/xml-body.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "<request>
+    <name>sample</name>
+    <time>Wed, 21 Oct 2015 18:27:50 GMT</time>
+</request>",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 7,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/xml",
+        },
+        {
+          "name": "Authorization",
+          "value": "token xxx",
+        },
+      ],
+      "httpVersion": "HTTP/1.1",
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments",
+    },
+  ],
+  "variables": [],
+}
+`;

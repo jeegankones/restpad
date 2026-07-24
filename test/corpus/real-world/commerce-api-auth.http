@@ -1,0 +1,47 @@
+
+
+### register usuario
+POST http://localhost:3000/api/user/register 
+Content-Type: application/json
+
+{
+    "nombre": "Rahma",
+    "edad": 20,
+    "ciudad": "Soria",
+    "interests": ["Restaurante"],
+    "email": "2@test.com",
+    "permiteRecibirOfertas": true,
+    "password": "HolaMundo01"
+}
+
+###Login usuario
+
+POST http://localhost:3000/api/user/login 
+Content-Type: application/json
+
+{
+
+"email": "2@test.com",
+"password": "HolaMundo01" }
+
+
+
+### Editar/Actualizar usuario
+PUT http://localhost:3000/api/user/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzlkMTM3OGU2ZWQ4N2I5YjMwNWUzN2IiLCJyb2xlIjoidXNlciIsImlhdCI6MTczODUwMjc0NiwiZXhwIjoxNzM4NTA5OTQ2fQ.tZ3f7eZYPsaX-JjBdIRkyRJJKlIp-St-uWvxC-W0mac
+
+{
+    "nombre": "Lucas",
+    "edad": 23,
+    "ciudad": "soria",
+    "interests": ["restaurante"],
+    "email": "2@test.com",
+    "permiteRecibirOfertas":true,
+    "password": "HolaMundo01"
+}
+
+### Eliminar usuario 
+DELETE http://localhost:3000/api/user/delete
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhkNWY3MjYxYTQwYzFmMWY1NDk2YjMiLCJyb2xlIjoidXNlciIsImlhdCI6MTczNzMxOTkzMSwiZXhwIjoxNzM3MzI3MTMxfQ.Lo1ikhF-gGInB1g-GRSJsQPF674m4muZWmJLn9oWW_U

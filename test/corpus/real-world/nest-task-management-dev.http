@@ -1,0 +1,61 @@
+### Create some users
+POST http://localhost:3001/auth/register
+Content-Type: application/json
+
+{
+  "username": "shrek",
+  "password": "Hey-now-you're-an-4ll-star"
+}
+
+###
+POST http://localhost:3001/auth/register
+Content-Type: application/json
+
+{
+  "username": "hodor",
+  "password": "H0ld-Th3'D00r"
+}
+
+### Sign in to store your auth token
+POST http://localhost:3001/auth/signin
+Content-Type: application/json
+
+{
+  "username": "shrek",
+  "password": "Hey-now-you're-an-4ll-star"
+}
+> {% client.global.set("auth_token", response.body.accessToken); %}
+
+### Create tasks for the current user
+POST http://localhost:3001/api/tasks
+Content-Type: application/json
+Authorization: Bearer {{ auth_token }}
+
+{
+  "title": "jane",
+  "description": "let's go be bad guys"
+}
+
+### Get the tasks for the current user
+GET http://localhost:3001/api/tasks
+Accept: application/json
+Authorization: Bearer {{ auth_token }}
+
+### Get a specific task
+GET http://localhost:3001/api/tasks/27c2ccfd-734e-4dce-bc57-7f7d05227074
+Accept: application/json
+Authorization: Bearer {{ auth_token }}
+
+###
+DELETE http://localhost:3001/api/tasks/d63839fb-889a-45af-9ba4-82ba23ab8a80
+Authorization: Bearer {{ auth_token }}
+
+###
+PUT http://localhost:3001/api/tasks/cbb4bf30-fe5c-4e1c-a100-6159a4b11831
+Content-Type: application/json
+
+{
+  "id": "cbb4bf30-fe5c-4e1c-a100-6159a4b11831",
+  "title": "task 3, bubba",
+  "status": "IN_PROGRESS"
+}

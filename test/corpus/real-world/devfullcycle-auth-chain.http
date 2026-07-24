@@ -1,0 +1,125 @@
+###
+# @name loginPartner1
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "partner1@user.com",
+    "password": "secret"
+}
+
+###
+@tokenPartner1 = {{ loginPartner1.response.body.token }}
+
+###
+# @name loginPartner2
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "partner2@user.com",
+    "password": "secret"
+}
+
+###
+@tokenPartner2 = {{ loginPartner2.response.body.token }}
+
+###
+# @name loginCustomer1
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "customer1@user.com",
+    "password": "secret"
+}
+
+###
+@tokenCustomer1 = {{ loginCustomer1.response.body.token }}
+
+### Criação do partner 1
+POST http://localhost:3000/partners/register
+Content-Type: application/json
+
+{
+    "name": "Partner 1",
+    "email": "partner1@user.com",
+    "password": "secret",
+    "company_name": "Company Name 1"
+}
+
+### Criação do partner 2
+POST http://localhost:3000/partners/register
+Content-Type: application/json
+
+{
+    "name": "Partner 2",
+    "email": "partner2@user.com",
+    "password": "secret",
+    "company_name": "Company Name 2"
+}
+
+###
+POST http://localhost:3000/customers/register
+Content-Type: application/json
+
+{
+    "name": "Customer 1",
+    "email": "customer1@user.com",
+    "password": "secret",
+    "address": "address test",
+    "phone": "333333333"
+}
+
+### Criação do evento pelo parceiro
+POST http://localhost:3000/partners/events
+Content-Type: application/json
+Authorization: Bearer {{ tokenPartner1 }}
+
+{
+    "name": "Evento test 1",
+    "description": "descrição do evento",
+    "date": "2025-01-01T00:00:00",
+    "location": "Rua x, bairro etc"
+}
+
+### Listagem de eventos do parceiro
+GET http://localhost:3000/partners/events
+Authorization: Bearer {{ tokenPartner1 }}
+
+### ### Listagem de um evento do parceiro
+GET http://localhost:3000/partners/events/1
+Authorization: Bearer {{ tokenPartner1 }}
+
+### Criação de tickets
+POST http://localhost:3000/events/1/tickets
+Content-Type: application/json
+Authorization: Bearer {{ tokenPartner1 }}
+
+{
+    "num_tickets": 10,
+    "price": 100
+}
+
+### (poderia trabalhar com paginação)
+GET http://localhost:3000/events/1/tickets
+
+###
+GET http://localhost:3000/events/1/tickets/1
+
+### Listagem de eventos
+GET http://localhost:3000/events
+
+### Listagem de um evento
+GET http://localhost:3000/events/1
+
+###
+POST http://localhost:3000/purchases
+Content-Type: application/json
+Authorization: Bearer {{ tokenCustomer1 }}
+
+{
+    "ticket_ids": [1],
+    "card_token": "tok_visa"
+}
+

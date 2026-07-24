@@ -1,0 +1,80 @@
+# Variables
+# ---------
+@baseUrl = http://{{$dotenv SERVER_URL}}:{{$dotenv SERVER_PORT}}/api/v1
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmMGMyMTgzNy1hMjFkLTRhNmItYjY3OS0yOTgxYzdiZmMxZjciLCJleHAiOjE2NjQ2MjYwNDYsImlhdCI6MTY2NDUzOTY0NiwibmJmIjoxNjY0NTM5NjQ2LCJ1c2VyX2lkIjoiZjBjMjE4MzctYTIxZC00YTZiLWI2NzktMjk4MWM3YmZjMWY3IiwidXNlcl9yb2xlcyI6IkFETUlOIiwidXNlcl9saW1pdCI6MTB9.yS8Xiq6r7URR-RArp-Jt5UyuB-hkcVia1PXIaB60z3U6NHtU9YKtifdzpRTtBEOLqxd2YXShI4q4Qlh1B1OBMw
+
+
+# Users
+# -----
+@userId = 4323a1b1-206b-42c7-a7e5-bcb45f7f6335
+@userIdToDelete = f6a6ed37-d0fc-4e45-b97d-3bbc6924562e
+@userEmail = test@gmail.com
+@passwordResetToken = 9f58f9c2-7983-4027-890e-bb9b8a267587
+
+# Login
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+    "username": "test@gmail.com",
+    "password": "00000000"
+}
+###
+
+# Forgotten password
+POST {{baseUrl}}/forgotten-password/{{userEmail}}
+Content-Type: application/json
+###
+
+# Update user password
+PATCH {{baseUrl}}/update-password/{{passwordResetToken}}
+Content-Type: application/json
+
+{
+    "password": "00000000"
+}
+###
+
+# Register
+POST {{baseUrl}}/users
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "username": "testgmail.com",
+    "password": "00000000",
+    "lastname": "Test",
+    "firstname": "Toto"
+}
+###
+
+# Users list
+GET {{baseUrl}}/users?page=4&limit=100
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
+
+# User information
+GET {{baseUrl}}/users/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
+
+# Update user
+PUT {{baseUrl}}/users/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "username": "test@gmail.com",
+    "password": "00000000",
+    "lastname": "Test",
+    "firstname": "Toto 2"
+}
+###
+
+# Delete user
+DELETE {{baseUrl}}/users/{{userIdToDelete}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###

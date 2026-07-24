@@ -160,6 +160,53 @@ describe("parseHttpFile", () => {
     expect(requestAtLine(file, 3)!.url).toBe("https://example.com/b");
   });
 
+  it("parses encoding-prefixed body file references", () => {
+    const file = parseHttpFile(
+      ["POST https://example.com/upload", "Content-Type: application/xml", "", "<@latin1 ./demo.xml"].join("\n"),
+    );
+    expect(file.requests[0]!.bodyFile).toEqual({
+      path: "./demo.xml",
+      processVariables: true,
+      encoding: "latin1",
+    });
+  });
+
+  it("captures every @prompt directive with name and description", () => {
+    const file = parseHttpFile(
+      [
+        "# @prompt username",
+        "# @prompt refCode Your reference code",
+        "# @prompt otp Your one-time password",
+        "POST https://example.com/verify-otp/{{refCode}}",
+      ].join("\n"),
+    );
+    const request = file.requests[0]!;
+    expect(request.prompts).toEqual([
+      { name: "username", description: undefined },
+      { name: "refCode", description: "Your reference code" },
+      { name: "otp", description: "Your one-time password" },
+    ]);
+    expect(request.directives["prompt"]).toBeUndefined();
+  });
+
+  it("joins &-continuation lines for form-urlencoded bodies only", () => {
+    const form = parseHttpFile(
+      [
+        "POST https://example.com/login",
+        "Content-Type: application/x-www-form-urlencoded",
+        "",
+        "name=foo",
+        "&password=bar",
+      ].join("\n"),
+    );
+    expect(form.requests[0]!.body).toBe("name=foo&password=bar");
+
+    const text = parseHttpFile(
+      ["POST https://example.com/raw", "Content-Type: text/plain", "", "name=foo", "&password=bar"].join("\n"),
+    );
+    expect(text.requests[0]!.body).toBe("name=foo\n&password=bar");
+  });
+
   it("returns no requests for an empty file", () => {
     expect(parseHttpFile("").requests).toHaveLength(0);
     expect(parseHttpFile("# just a comment").requests).toHaveLength(0);

@@ -1,0 +1,64 @@
+#!/usr/bin/env httpx --httpfile
+
+### get my internet ip
+#@name myip
+GET https://httpbin.org/ip
+
+### inspection http post
+#@name post
+POST https://httpbin.org/post
+Content-Type: application/json
+
+[
+  1
+]
+
+### hello pre script
+#@name script-demo
+< {%
+  request.variables.set("name","linux_china");
+  request.variables.set("age","22");
+%}
+GET https://httpbin.org/get?id=1&name={{name}}&age={{age}}
+
+### inspection http get
+#@name get
+GET https://httpbin.org/get?
+  id=123&
+  value=content
+
+### RSocket Request
+#@name request
+RSOCKET com.example.UserService.findById
+Host: 127.0.0.1:42252
+Content-Type: application/json
+
+1
+
+### RSocket Stream
+#@name stream
+STREAM com.example.UserService.findAll
+Host: 127.0.0.1:42252
+Content-Type: application/json
+
+### query by json
+#@name query_by_json
+POST https://graphqlzero.almansi.me/api
+Content-Type: application/json
+
+{
+  "query": "query { post(id: 1) { id title } }"
+}
+
+### graphql query
+#@name query
+GRAPHQL https://graphqlzero.almansi.me/api
+
+query findPostById {
+  post(id: 1) {
+    id
+    title
+    body
+  }
+}
+

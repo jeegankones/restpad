@@ -1,0 +1,45 @@
+@guestId = dummy
+@roomId = dummy
+
+### Check In
+
+# @name checkin
+POST http://localhost:3000/guests/{{guestId}}/stays/{{roomId}} HTTP/1.1
+content-type: application/json
+
+### No body passed
+
+### Capture and parse the Location header
+@location = {{checkin.response.headers.Location}}
+
+### Get State
+
+GET http://localhost:3000{{location}} HTTP/1.1
+content-type: application/json
+
+### Record Charge
+
+@amount = 10
+
+POST http://localhost:3000{{location}}/charges HTTP/1.1
+content-type: application/json
+
+{
+  "amount": {{amount}}
+}
+
+### Record Payment
+
+@amount = 10
+
+POST http://localhost:3000{{location}}/payments HTTP/1.1
+content-type: application/json
+
+{
+  "amount": {{amount}}
+}
+
+### Checkout
+
+DELETE http://localhost:3000{{location}} HTTP/1.1
+content-type: application/json

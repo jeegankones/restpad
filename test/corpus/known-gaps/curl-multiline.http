@@ -1,0 +1,4 @@
+curl -X POST https://example.com/comments \
+  -H "Content-Type: application/json" \
+  -H "Authorization: token xxx" \
+  -d '{"name":"sample","time":"now"}'

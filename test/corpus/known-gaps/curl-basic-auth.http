@@ -1,0 +1,1 @@
+curl -u user:passwd https://httpbin.org/basic-auth/user/passwd
