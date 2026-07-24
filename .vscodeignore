@@ -15,9 +15,8 @@
 !README.md
 !LICENSE
 
-# Icon for the marketplace listing.
-# TODO(branding): add icon.png at repo root and re-include it here:
-# !icon.png
+# Icon for the marketplace listing (source SVG in assets/, not shipped).
+!icon.png
 
 # --- belt-and-suspenders: keep noise out even if a rule above widens ---
 dist/**/*.map

@@ -29,6 +29,7 @@
     "type": "git",
     "url": "https://github.com/jeegankones/restpad"
   },
+  "icon": "icon.png",
   "main": "./dist/extension.js",
   "activationEvents": [
     "onLanguage:http"
@@ -67,6 +68,14 @@
       {
         "command": "restpad.switchEnvironment",
         "title": "Restpad: Switch Environment"
+      },
+      {
+        "command": "restpad.enterLicenseKey",
+        "title": "Restpad: Enter Pro License Key"
+      },
+      {
+        "command": "restpad.clearLicenseKey",
+        "title": "Restpad: Remove Pro License Key"
       }
     ],
     "configuration": {
