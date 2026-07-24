@@ -1,4 +1,4 @@
-# Restpad demo — every core feature in one file.
+# Restpad demo: every core feature in one file.
 # Click "▶▶ Send All" at the top, or "▶ Send Request" on any block.
 
 @baseUrl = https://jsonplaceholder.typicode.com
@@ -7,7 +7,7 @@
 GET {{baseUrl}}/users/1
 Accept: application/json
 
-### Named request — its response feeds later requests
+### Named request whose response feeds later requests
 # @name firstPost
 GET {{baseUrl}}/posts/1
 
@@ -29,7 +29,7 @@ GET {{baseUrl}}/comments
     ?postId=1
     &_limit=3
 
-### Paste a curl command — it just works
+### Paste a curl command, it just works
 curl -X POST {{baseUrl}}/posts -H "Content-Type: application/json" -d '{"title":"from curl"}'
 
 ### Redirect control

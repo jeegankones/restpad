@@ -6,7 +6,7 @@ coverage/
 .DS_Store
 dist-test/
 
-# internal planning / business / research docs — kept local for agent use
+# internal planning / business / research docs, kept local for agent use
 /BLOCKERS.md
 /BUSINESS.md
 /PLAN.md

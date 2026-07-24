@@ -1,4 +1,4 @@
-# .vscodeignore — controls what ships inside the packaged .vsix.
+# .vscodeignore controls what ships inside the packaged .vsix.
 #
 # Strategy: exclude everything, then re-include ONLY the runtime files.
 # dist/ is a self-contained esbuild bundle, so node_modules is not shipped

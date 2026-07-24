@@ -21,9 +21,9 @@ export interface FileVariable {
 
 export interface BodyFileRef {
   path: string;
-  /** `<@ ./file` — process variables inside the referenced file. */
+  /** `<@ ./file`: process variables inside the referenced file. */
   processVariables: boolean;
-  /** `<@latin1 ./file` — file encoding override; defaults to utf8. */
+  /** `<@latin1 ./file`: file encoding override; defaults to utf8. */
   encoding?: string;
 }
 
@@ -43,7 +43,7 @@ export interface HttpRequest {
   bodyFile?: BodyFileRef;
   /** `# @key value` directives, e.g. no-redirect, no-cookie-jar. */
   directives: Record<string, string | true>;
-  /** `# @prompt name [description]` — one entry per prompt line. */
+  /** `# @prompt name [description]`: one entry per prompt line. */
   prompts: PromptVariable[];
   /** 0-based, inclusive. Used for CodeLens placement and cursor lookup. */
   startLine: number;
