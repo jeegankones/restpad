@@ -86,6 +86,14 @@
         "title": "Restpad: Switch Environment"
       },
       {
+        "command": "restpad.showHistory",
+        "title": "Restpad: Show Request History"
+      },
+      {
+        "command": "restpad.saveResponse",
+        "title": "Restpad: Save Last Response Body"
+      },
+      {
         "command": "restpad.enterLicenseKey",
         "title": "Restpad: Enter Pro License Key"
       },

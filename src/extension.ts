@@ -4,6 +4,7 @@ import * as vscode from "vscode";
 import { executeRequest } from "./engine/client";
 import { CookieJar } from "./engine/cookieJar";
 import { parseDotenv } from "./environments/dotenv";
+import { HistoryStore } from "./history/historyStore";
 import { EnvironmentManager } from "./environments/manager";
 import { LicenseManager } from "./licensing/manager";
 import { parseHttpFile, requestAtLine, type HttpRequest } from "./parser/httpParser";
@@ -16,11 +17,13 @@ let activeAbort: AbortController | undefined;
 let environments: EnvironmentManager;
 let responses: ResponseStore;
 let cookieJar: CookieJar;
+let history: HistoryStore;
 
 export function activate(context: vscode.ExtensionContext): void {
   environments = new EnvironmentManager(context);
   responses = new ResponseStore();
   cookieJar = new CookieJar();
+  history = new HistoryStore();
   const licenses = new LicenseManager(context);
   void licenses.revalidateIfDue();
   context.subscriptions.push(
@@ -31,6 +34,8 @@ export function activate(context: vscode.ExtensionContext): void {
     ),
     vscode.commands.registerCommand("restpad.sendRequest", sendRequest),
     vscode.commands.registerCommand("restpad.sendAllRequests", sendAllRequests),
+    vscode.commands.registerCommand("restpad.showHistory", showHistory),
+    vscode.commands.registerCommand("restpad.saveResponse", saveResponse),
     vscode.commands.registerCommand("restpad.cancelRequest", () => {
       activeAbort?.abort();
       activeAbort = undefined;
@@ -103,6 +108,7 @@ async function sendRequest(atLine?: number): Promise<void> {
     if (request.name) {
       responses.save(request.name, { request: resolved, response });
     }
+    history.push(resolved, response);
     panel.renderResponse(resolved, response);
   } catch (error) {
     if (abort.signal.aborted) {
@@ -156,7 +162,8 @@ async function sendAllRequests(): Promise<void> {
           signal: abort.signal,
           cookieJar,
         },
-        (completed, total) => {
+        (completed, total, latest) => {
+          if (latest.response) history.push(latest.resolved, latest.response);
           progress.report({
             message: `${completed}/${total}`,
             increment: 100 / total,
@@ -166,6 +173,51 @@ async function sendAllRequests(): Promise<void> {
       panel.renderRunSummary(results);
     },
   );
+}
+
+async function showHistory(): Promise<void> {
+  const entries = history.list();
+  if (entries.length === 0) {
+    void vscode.window.showInformationMessage("Restpad: no requests sent yet this session.");
+    return;
+  }
+  const picked = await vscode.window.showQuickPick(
+    entries.map((entry, index) => ({
+      label: `${entry.response.status} · ${entry.request.method} ${entry.request.url}`,
+      description: new Date(entry.at).toLocaleTimeString(),
+      index,
+    })),
+    { placeHolder: "Reopen a response from this session" },
+  );
+  if (!picked) return;
+  const entry = entries[picked.index]!;
+  ResponsePanel.show({
+    method: entry.request.method,
+    url: entry.request.url,
+  } as HttpRequest).renderResponse(entry.request, entry.response);
+}
+
+async function saveResponse(): Promise<void> {
+  const latest = history.latest();
+  if (!latest) {
+    void vscode.window.showInformationMessage("Restpad: no response to save yet.");
+    return;
+  }
+  const contentType = String(latest.response.headers["content-type"] ?? "");
+  const extension = contentType.includes("json")
+    ? "json"
+    : contentType.includes("html")
+      ? "html"
+      : contentType.includes("xml")
+        ? "xml"
+        : "txt";
+  const target = await vscode.window.showSaveDialog({
+    defaultUri: vscode.Uri.file(`response.${extension}`),
+    saveLabel: "Save response body",
+  });
+  if (!target) return;
+  await vscode.workspace.fs.writeFile(target, latest.response.body);
+  void vscode.window.setStatusBarMessage(`Restpad: saved ${target.fsPath}`, 3000);
 }
 
 /** Read a .env file sitting next to the .http file, if any (REST Client compat). */
