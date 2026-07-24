@@ -1,95 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`corpus: compatibility snapshots > known-gaps/curl-basic-auth.http > parses without throwing and matches snapshot 1`] = `
-{
-  "requests": [
-    {
-      "body": undefined,
-      "bodyFile": undefined,
-      "directives": {},
-      "endLine": 0,
-      "headers": [],
-      "httpVersion": undefined,
-      "method": "GET",
-      "name": undefined,
-      "prompts": [],
-      "requestLine": 0,
-      "startLine": 0,
-      "url": "curl -u user:passwd https://httpbin.org/basic-auth/user/passwd",
-    },
-  ],
-  "variables": [],
-}
-`;
-
-exports[`corpus: compatibility snapshots > known-gaps/curl-multiline.http > parses without throwing and matches snapshot 1`] = `
-{
-  "requests": [
-    {
-      "body": "  -H "Content-Type: application/json" \\
-  -H "Authorization: token xxx" \\
-  -d '{"name":"sample","time":"now"}'",
-      "bodyFile": undefined,
-      "directives": {},
-      "endLine": 3,
-      "headers": [],
-      "httpVersion": undefined,
-      "method": "GET",
-      "name": undefined,
-      "prompts": [],
-      "requestLine": 0,
-      "startLine": 0,
-      "url": "curl -X POST https://example.com/comments \\",
-    },
-  ],
-  "variables": [],
-}
-`;
-
-exports[`corpus: compatibility snapshots > known-gaps/curl-post-data.http > parses without throwing and matches snapshot 1`] = `
-{
-  "requests": [
-    {
-      "body": undefined,
-      "bodyFile": undefined,
-      "directives": {},
-      "endLine": 0,
-      "headers": [],
-      "httpVersion": undefined,
-      "method": "GET",
-      "name": undefined,
-      "prompts": [],
-      "requestLine": 0,
-      "startLine": 0,
-      "url": "curl -X POST https://example.com/comments -H "Content-Type: application/json" -d '{"name":"sample"}'",
-    },
-  ],
-  "variables": [],
-}
-`;
-
-exports[`corpus: compatibility snapshots > known-gaps/curl-simple-get.http > parses without throwing and matches snapshot 1`] = `
-{
-  "requests": [
-    {
-      "body": undefined,
-      "bodyFile": undefined,
-      "directives": {},
-      "endLine": 0,
-      "headers": [],
-      "httpVersion": undefined,
-      "method": "GET",
-      "name": undefined,
-      "prompts": [],
-      "requestLine": 0,
-      "startLine": 0,
-      "url": "curl https://example.com/comments/1",
-    },
-  ],
-  "variables": [],
-}
-`;
-
 exports[`corpus: compatibility snapshots > real-world/aspnetcore-keycloak-rest.http > parses without throwing and matches snapshot 1`] = `
 {
   "requests": [
@@ -3247,6 +3157,113 @@ exports[`corpus: compatibility snapshots > restclient-readme/body-file-reference
       "requestLine": 0,
       "startLine": 0,
       "url": "https://example.com/comments",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/curl-basic-auth.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 0,
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Basic dXNlcjpwYXNzd2Q=",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://httpbin.org/basic-auth/user/passwd",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/curl-multiline.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{"name":"sample","time":"now"}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 3,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+        {
+          "name": "Authorization",
+          "value": "token xxx",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/curl-post-data.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": "{"name":"sample"}",
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 0,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+        },
+      ],
+      "httpVersion": undefined,
+      "method": "POST",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments",
+    },
+  ],
+  "variables": [],
+}
+`;
+
+exports[`corpus: compatibility snapshots > restclient-readme/curl-simple-get.http > parses without throwing and matches snapshot 1`] = `
+{
+  "requests": [
+    {
+      "body": undefined,
+      "bodyFile": undefined,
+      "directives": {},
+      "endLine": 0,
+      "headers": [],
+      "httpVersion": undefined,
+      "method": "GET",
+      "name": undefined,
+      "prompts": [],
+      "requestLine": 0,
+      "startLine": 0,
+      "url": "https://example.com/comments/1",
     },
   ],
   "variables": [],

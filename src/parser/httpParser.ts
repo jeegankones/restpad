@@ -6,6 +6,8 @@
  * `{{variable}}` references are left in place for the resolver.
  */
 
+import { parseCurl } from "./curlParser";
+
 export interface HeaderEntry {
   name: string;
   value: string;
@@ -61,6 +63,8 @@ const FILE_VARIABLE = /^@([\w.-]+)\s*=\s*(.*)$/;
 const REQUEST_LINE =
   /^(?:(GET|POST|PUT|DELETE|PATCH|HEAD|OPTIONS|TRACE|CONNECT|LOCK|UNLOCK|PROPFIND|PROPPATCH|COPY|MOVE|MKCOL|MKCALENDAR|ACL|SEARCH)\s+)?(.+?)(?:\s+(HTTP\/[\d.]+))?\s*$/i;
 const HEADER_LINE = /^([\w-]+)\s*:\s*(.*)$/;
+/** A request line that is a pasted `curl` command (case-sensitive, word boundary). */
+const CURL_REQUEST = /^curl(?:\s|$)/;
 const QUERY_CONTINUATION = /^\s+[?&]/;
 const BODY_FILE_REF = /^<(?:@([\w-]*))?\s+(.+)$/;
 
@@ -131,6 +135,29 @@ function parseBlock(
   if (i > end) return undefined; // block had no request (variables/comments only)
 
   const requestLine = i;
+
+  // cURL-format request: delegate to the curl parser. REST Client accepts a
+  // pasted `curl ...` command in place of a native request line.
+  if (CURL_REQUEST.test(lines[i]!.trim())) {
+    const parsed = parseCurl(lines.slice(i, end + 1).join("\n"));
+    let curlEnd = end;
+    while (curlEnd > requestLine && lines[curlEnd]!.trim() === "") curlEnd--;
+    return {
+      name,
+      method: parsed.method,
+      url: parsed.url,
+      httpVersion: undefined,
+      headers: parsed.headers,
+      body: parsed.body,
+      bodyFile: undefined,
+      directives,
+      prompts,
+      startLine: requestLine,
+      endLine: curlEnd,
+      requestLine,
+    };
+  }
+
   const match = lines[i]!.trim().match(REQUEST_LINE);
   if (!match || !match[2]) return undefined;
   const method = (match[1] ?? "GET").toUpperCase();
