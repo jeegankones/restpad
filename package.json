@@ -1,10 +1,10 @@
 {
   "name": "restpad",
   "displayName": "Restpad - REST API Client",
-  "description": "Fast, offline REST API client for .http files. REST Client compatible. No account, no cloud, no paywall. Environments, variables, request chaining, cookies, curl import.",
+  "description": "Fast, offline REST API client for .http files. Free, open source, and REST Client compatible. Environments, variables, request chaining, cookies, curl import. No account, no cloud.",
   "version": "0.0.1",
   "publisher": "KeeganJones",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "private": true,
   "engines": {
     "vscode": "^1.90.0"
@@ -24,7 +24,6 @@
     "http",
     "api",
     "rest api",
-    "graphql",
     "postman",
     "insomnia",
     "thunder client",
@@ -92,14 +91,6 @@
       {
         "command": "restpad.saveResponse",
         "title": "Restpad: Save Last Response Body"
-      },
-      {
-        "command": "restpad.enterLicenseKey",
-        "title": "Restpad: Enter Pro License Key"
-      },
-      {
-        "command": "restpad.clearLicenseKey",
-        "title": "Restpad: Remove Pro License Key"
       }
     ],
     "configuration": {
