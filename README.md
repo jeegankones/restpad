@@ -1,8 +1,8 @@
 # Restpad: REST API Client for VS Code
 
 Fast, offline REST API client. Open a `.http` file and send requests
-instantly. **No account. No cloud sync you didn't ask for. No paywall
-surprises.**
+instantly. **Free and open source (MIT). No account. No cloud sync you didn't
+ask for. No paid tier.**
 
 > Drop-in compatible with REST Client `.http`/`.rest` syntax. Your existing
 > files just work.
@@ -49,4 +49,19 @@ Click **▶ Send Request** above any request (or run *Restpad: Send Request*).
 
 Try it: open [`examples/demo.http`](examples/demo.http).
 
-*(Roadmap: GraphQL, WebSocket/SSE, code generation.)*
+## Why another one?
+
+[REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+is loved by millions and hasn't shipped a release since August 2022. Restpad
+reads the same `.http` syntax, so your existing files work unchanged. That's the
+whole idea.
+
+## Contributing
+
+Bug reports and PRs are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for
+setup, project layout, and what to test. This is a side project, so issues get
+looked at in batches.
+
+## License
+
+[MIT](LICENSE). Fork it, change it, ship it.

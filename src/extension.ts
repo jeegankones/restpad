@@ -6,7 +6,6 @@ import { CookieJar } from "./engine/cookieJar";
 import { parseDotenv } from "./environments/dotenv";
 import { HistoryStore } from "./history/historyStore";
 import { EnvironmentManager } from "./environments/manager";
-import { LicenseManager } from "./licensing/manager";
 import { parseHttpFile, requestAtLine, type HttpRequest } from "./parser/httpParser";
 import { runAll } from "./runner/runAll";
 import { resolveRequest } from "./variables/resolver";
@@ -24,10 +23,7 @@ export function activate(context: vscode.ExtensionContext): void {
   responses = new ResponseStore();
   cookieJar = new CookieJar();
   history = new HistoryStore();
-  const licenses = new LicenseManager(context);
-  void licenses.revalidateIfDue();
   context.subscriptions.push(
-    ...licenses.register(),
     vscode.languages.registerCodeLensProvider(
       { language: "http" },
       new SendRequestCodeLensProvider(),
